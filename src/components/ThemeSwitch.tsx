@@ -7,9 +7,13 @@ const ThemeSwitcher = () => {
   const [mounted, setMounted] = useState(false)
   const { theme, setTheme, resolvedTheme } = useTheme()
   const toggle = mounted && (theme === 'dark' || resolvedTheme === 'dark')
-  const handleTheme = () => setTheme(theme === 'dark' || resolvedTheme === 'dark' ? 'light' : 'dark')
+  const handleTheme = () => {
+    setTheme(theme === 'dark' || resolvedTheme === 'dark' ? 'light' : 'dark')
+  }
   
-  useEffect(() => {setMounted(true)}, [])
+  useEffect(() => {
+      setMounted(true)
+  },[])
 
   return (
     <div className="inline-flex items-center p-1 rounded-full">

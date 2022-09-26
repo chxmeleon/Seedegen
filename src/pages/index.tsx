@@ -7,9 +7,6 @@ const Home: NextPage = () => {
   return (
     <Layout>
       <div className="w-full h-screen m-auto">
-        <h1>
-          hello
-        </h1>
       </div>
     </Layout>
   )
