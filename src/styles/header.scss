@@ -1,0 +1,51 @@
+.navbar-container {
+  @apply absolute z-[99] w-full px-6 flex justify-between items-center bg-gray-50/10 dark:bg-gray-900/10 backdrop-blur-sm;
+
+  .navbar-right {
+    @apply w-[17rem] flex justify-around items-center;
+
+    li {
+      @apply text-lg;
+    }
+  }
+
+  .menu-dropdown {
+    @apply relative text-lg;
+
+    .menu-dropdown-content {
+      @apply absolute p-4 left-0 hidden w-52 rounded-b-md bg-gray-200 dark:bg-gray-800 drop-shadow;
+
+      p {
+        @apply pt-6;
+      }
+    }
+
+    .menu-dropdown-btn {
+      @apply py-6;
+    }
+  }
+
+  .menu-dropdown:hover .menu-dropdown-content {
+    @apply block;
+  }
+
+  .user-dropdown {
+    @apply relative text-lg;
+
+    .user-dropdown-content {
+      @apply absolute p-4 -left-24 hidden w-52 rounded-b-md bg-gray-200 dark:bg-gray-800 drop-shadow;
+
+      p {
+        @apply pt-6 pl-2;
+      }
+    }
+
+    .user-dropdown-btn {
+      @apply py-6;
+    }
+  }
+
+  .user-dropdown:hover .user-dropdown-content {
+    @apply block;
+  }
+}

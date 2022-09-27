@@ -1,6 +1,6 @@
 import type { NextPage } from 'next'
-import Layout from '../components/Layout'
-import TrendingRankBoard from '../components/TrendingRankBoard'
+import Layout from '../components/layouts/Layout'
+import TrendingRankBoard from '../components/elements/TrendingRankBoard'
 
 const Trending: NextPage = () => {
   return (

@@ -1,6 +1,6 @@
 import { useTheme } from 'next-themes';
 import { useState, useEffect } from 'react'
-import { MoonIcon, SunIcon } from '@heroicons/react/24/outline'
+import { MoonIcon, SunIcon } from '@heroicons/react/24/solid'
 
 const ThemeSwitcher = () => {
 
@@ -20,11 +20,15 @@ const ThemeSwitcher = () => {
       <button
         onClick={handleTheme}
       >
-        {toggle ? 
-          <SunIcon className="w-8 hover:text-teal-500" />
-        :
-          <MoonIcon className="w-8 hover:text-teal-600" />
-        }
+        <span className="relative inline-block w-12 h-6 rounded-3xl bg-gray-400 dark:bg-blue-400">
+          {toggle ? 
+            <span className="absolute w-4 h-4 left-1 bottom-1 transition-all ease-in-out duration-[475ms] delay-75 rounded-full translate-x-6 bg-gray-50 active:translate-x-0">
+            </span>
+          :
+            <span className="absolute w-4 h-4 left-1 bottom-1 transition-all ease-in-out duration-[475ms] delay-75 rounded-full translate-x-0 bg-gray-50">
+            </span>
+          }
+        </span>
       </button>
     </div>
   )
