@@ -12,7 +12,7 @@ const ThemeSwitcher = () => {
   }
   
   useEffect(() => {
-      setMounted(true)
+    setMounted(true)
   },[])
 
   return (
