@@ -1,0 +1,33 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider          = "postgresql"
+  url               = env("DATABASE_URL")
+  shadowDatabaseUrl = env("SHADOW_DATABASE_URL")
+}
+
+model ProfitLeaderboard30Days {
+  id            String @id @default(cuid())
+  ens           String
+  walletAddress String
+  profit        String
+  revernced     String
+  spent         String
+  ROI           String
+}
+
+
+model ProfitLeaderboard {
+  id            String @id @default(cuid())
+  ens           String
+  walletAddress String
+  profit        String
+  revernced     String
+  spent         String
+  ROI           String
+}
