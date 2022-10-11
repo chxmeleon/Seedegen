@@ -15,6 +15,13 @@ export default function Header() {
         </Link>
         <ul className="navbar-right">
           <li>
+            <Link href="/Analytics" >
+              <a aria-label="News page link" >
+                <p>Analytics</p>
+              </a>
+            </Link>
+          </li>
+          <li>
             <div className="menu-dropdown">
               <button className="menu-dropdown-btn">Collections</button>
               <div className="menu-dropdown-content">
