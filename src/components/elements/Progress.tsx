@@ -9,8 +9,8 @@ const Progress = (props: Props) => {
   const { value } = props
 
   return (
-    <div className="relative w-[80px] h-3 bg-gray-600">
-      <span className="absolute h-3 bg-cyan-500" style={{width: `${value}px`}}></span>
+    <div className="relative w-[80px] h-2 bg-gray-600 rounded-sm">
+      <span className="absolute h-2 bg-cyan-500 rounded-sm" style={{width: `${value}px`}}></span>
     </div>
   )
 }

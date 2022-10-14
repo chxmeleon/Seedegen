@@ -4,3 +4,7 @@
 
 @import '../styles/Trending.scss';
 @import '../styles/header.scss';
+
+.rank-content > li:nth-child(2n) {
+  @apply dark:bg-gray-700;
+}
