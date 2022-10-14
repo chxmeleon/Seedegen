@@ -5,25 +5,37 @@ import ProfitRank from './ProfitRank'
 const fetcher = (url: RequestInfo | URL) => fetch(url).then((r) => r.json())
 
 const ProfitLeaderboard = () => {
-  const url =
-    'https://bigdata-api.whatscoin.com/smartmoney/nft/profitLeaderboard?label=all&chainId=1'
+  const url ='api/data/gain-rank-30days'
   const ethPriceUrl =
     'https://min-api.cryptocompare.com/data/price?fsym=ETH&tsyms=USD'
 
   const { data: tradeData } = useSWR(url, fetcher)
   const { data: ethToUsd } = useSWR(ethPriceUrl, fetcher)
 
-  console.log(tradeData)
-  console.log(ethToUsd)
-
+  const rankContent = [...new Array(100)].map((_val, idx) => {
+    const allData = tradeData?.[idx]
+    return (
+      <ProfitRank
+        key={idx.toString()}
+        id={idx.toString()}
+        ens={allData?.ens}
+        address={allData?.address}
+        spent={allData?.spent}
+        revernced={allData?.received}
+        profit={allData?.profit}
+        roi={allData?.roi}
+      />
+    )
+  }) 
+    
   return (
-    <ProfitRank
-      address='1'
-      spent='1'
-      revernced='1'
-      profit='1'
-      profitPercent='100'
-    />
+    <>
+      <div>
+        <ul>
+          {rankContent}
+        </ul>
+      </div>
+    </>
   )
 }
 

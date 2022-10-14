@@ -1,20 +1,23 @@
 import React from 'react'
 import useSWR from 'swr'
+import { number } from 'yup'
 import Progress from './Progress'
 
 
 
 type RankProps = {
+  id: string
+  ens: string
   address: string
-  revernced: string
-  spent: string
-  profit: string
-  profitPercent: string
+  revernced: number 
+  spent: number
+  profit: number
+  roi: number
 }
 
 
 const ProfitRank = (props: RankProps) => {
-  const { address, revernced, spent, profit, profitPercent } = props
+  const { id, ens, address, revernced, spent, profit, roi } = props
 
   const remap = (value:any, max:any) => {
     return Math.round((value / max) * 80)
@@ -32,10 +35,13 @@ const ProfitRank = (props: RankProps) => {
   
 
   return (
-    <div className='w-full px-24 flex justify-around items-center'>
+    <div id={id} className='w-full px-24 flex justify-around items-center'>
       <div>
-        <div>{address}</div>
+        <div>{ens}</div>
       </div>
+      {/* <div> */}
+      {/*   <div>{address}</div> */}
+      {/* </div> */}
       <ProfitContent value={22}>
         {revernced}
       </ProfitContent>
@@ -46,7 +52,7 @@ const ProfitRank = (props: RankProps) => {
         {profit}
       </ProfitContent>
       <ProfitContent value={22}>
-        {profitPercent}
+        {roi}
       </ProfitContent>
     </div>
   )
