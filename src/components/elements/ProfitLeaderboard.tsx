@@ -10,6 +10,9 @@ const ProfitLeaderboard = () => {
   const { data: tradeData } = useSWR(url, fetcher)
   const { data: ethToUsd } = useSWR(ethPriceUrl, fetcher)
 
+  console.log(tradeData)
+  console.log(ethToUsd)
+  
   const requestMaxValue = () => {
     const keyName = ['profit', 'received', 'spent', 'roi']
     const newKeyArr = [...new Array(4)].map((_val, idx) => {

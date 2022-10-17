@@ -13,6 +13,9 @@ const nextConfig = {
       'i.seadn.io',
     ],
   },
+  env: {
+    DATABASE_URL: process.env.DATABASE_URL,
+  },
 }
 
 module.exports = nextConfig
