@@ -7,7 +7,7 @@ const Analytics: NextPage = () => {
     <>
       <Layout>
         <div className="w-full m-auto py-64 flex justify-center items-center">
-          {/* <ProfitLeaderboard /> */}
+          <ProfitLeaderboard />
         </div>
       </Layout>
     </>
