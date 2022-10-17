@@ -36,28 +36,28 @@ const ProfitRank = (props: RankProps) => {
 
   const ProfitContent = ({ children, value }: any) => {
     return (
-      <div className='w-[92%] flex justify-end items-center'>
-        <div className='pr-7'>{children}</div>
+      <td className='relative w-full flex justify-end items-center'>
+        <div className='pr-8'>{children}</div>
         <Progress value={value} />
-      </div>
+      </td>
     )
   }
 
   return (
-    <li
+    <tr
       id={id}
-      className='w-full grid grid-cols-5 gap-3 justify-items-start  px-20 py-3'
+      className="w-full grid grid-cols-5 px-16 gap-4 justify-items-center py-2"
     >
-      <div>
-        <p>{ens}</p>
-      </div>
+      <td className="justify-self-start">
+        {ens}
+      </td>
       <ProfitContent value={remap(profit, maxProfit)}>{profit}</ProfitContent>
       <ProfitContent value={remap(revernced, maxRevernced)}>
         {revernced}
       </ProfitContent>
       <ProfitContent value={remap(spent, maxSpent)}>{spent}</ProfitContent>
       <ProfitContent value={remap(roi, maxRoi)}>{roi}</ProfitContent>
-    </li>
+    </tr>
   )
 }
 
