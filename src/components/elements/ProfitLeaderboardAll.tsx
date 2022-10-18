@@ -79,12 +79,12 @@ const ProfitLeaderboard30D = () => {
           </div>
           <div className="profit-table-container">
             <div className="w-full relative min-w-max ">
-              <div className="grid grid-cols-5 py-2  dark:bg-gray-700  justify-items-center">
-                <div>ENS</div>
-                <div>Profit(ETH)</div>
-                <div>Revernced(ETH)</div>
-                <div>Spent(ETH)</div>
-                <div>ROI(ETH)</div>
+              <div className="grid grid-cols-5 px-10 py-2 gap-4 justify-items-center dark:bg-gray-700">
+                <div className="justify-self-start pl-4" >ENS</div>
+                <div className="justify-self-end ">Profit(ETH)</div>
+                <div className="justify-self-end ">Revernced(ETH)</div>
+                <div className="justify-self-end ">Spent(ETH)</div>
+                <div className="justify-self-end ">ROI(ETH)</div>
               </div>
               <div className="rank-content w-full text-left">
                 {rankContent}

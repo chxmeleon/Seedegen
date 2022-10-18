@@ -38,14 +38,14 @@ const ProfitRank = (props: RankProps) => {
   useEffect(() => {
     setTimeout(() => {
       setLoading(false)
-    }, 1100)
+    }, 1500)
   }, [loading])
 
 
   
 
   const ProfitContent = ({ children, value, max }: any) => {
-    const [width, setWidth] = useState(5)
+    const [width, setWidth] = useState(15)
     const remapRange = (value: any, max: any) => {
       setWidth(Math.round((value/ max) * 80)) 
     }
@@ -78,7 +78,7 @@ const ProfitRank = (props: RankProps) => {
   return (
     <div
       id={id}
-      className="w-full grid grid-cols-5 px-16 gap-4 justify-items-center py-2" 
+      className="w-full grid grid-cols-5 px-10 gap-4 justify-items-center py-2" 
     >
     {loading && !data ? 
       <>
@@ -86,7 +86,7 @@ const ProfitRank = (props: RankProps) => {
       </>
       :
       <>
-        <div className="w-[120px] justify-self-start pl-4 truncate">
+        <div className="w-[170px] justify-self-start pl-4 truncate">
           {ens}
         </div>
         <ProfitContent value={profit} max={maxProfit}>{profit}</ProfitContent>
