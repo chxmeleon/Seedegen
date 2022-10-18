@@ -1,5 +1,4 @@
 import React from 'react'
-import Progress from './Progress'
 
 type RankProps = {
   id: string
@@ -30,6 +29,7 @@ const ProfitRank = (props: RankProps) => {
     maxRoi,
   } = props
 
+
   const remap = (value: any, max: any) => {
     return Math.round((value / max) * 80)
   }
@@ -38,7 +38,11 @@ const ProfitRank = (props: RankProps) => {
     return (
       <td className='relative w-full flex justify-end items-center'>
         <div className='pr-8'>{children}</div>
-        <Progress value={value} />
+        <div className='relative w-[80px] h-2 bg-gray-600 rounded-sm'>
+          <div
+            className='progress-bar'
+            style={{width: `${value}px`, transition: "0s width 1s ease-in-out"}}></div>
+        </div>
       </td>
     )
   }

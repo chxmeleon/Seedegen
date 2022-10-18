@@ -18,12 +18,11 @@ const ProfitLeaderboard = () => {
   const [limit, setLimit] = useState(10)
   const count = 500 / limit
   const handleSelectValue = (e:any) => {setLimit(e.target.value)}
+
   const fullDataUrl = 'api/data/gain-rank-30days?limit=500' 
-  const filterUrl = 'api/data/gain-rank-30days?limit='+ limit +'&offset=' + offset
   const ethPriceUrl = 'https://min-api.cryptocompare.com/data/price?fsym=ETH&tsyms=USD'
 
   const { data: tradeData } = useSWR(fullDataUrl, fetcher)
-  const { data: selectedData } = useSWR(filterUrl, fetcher)
   const { data: ethToUsd } = useSWR(ethPriceUrl, fetcher)
   
   const keyName = ['profit', 'received', 'spent', 'roi']
@@ -36,7 +35,7 @@ const ProfitLeaderboard = () => {
   })
 
   const rankContent = [...new Array(Number(limit))].map((_val, idx) => {
-    const allData = selectedData?.[idx]
+    const allData = tradeData?.[idx + offset]
     const spent = allData?.spent.toFixed(2)
     const revernced = allData?.received.toFixed(2)
     const profit = allData?.profit.toFixed(2)
@@ -49,7 +48,7 @@ const ProfitLeaderboard = () => {
     return (
       <ProfitRank
         key={idx.toString()}
-        id={idx.toString()}
+        id={(idx+1).toString()}
         ens={allData?.ens}
         address={allData?.address}
         spent={spent}
@@ -66,7 +65,7 @@ const ProfitLeaderboard = () => {
 
   return (
     <>
-      <section className='w-full lg:w-5/6'>
+      <section className='w-full'>
         <div className='w-[93%] m-auto dark:bg-slate-800 py-10 rounded-xl'>
           <div className="font-semibold text-3xl p-10 text-gray-200">
             <div className="flex ">
@@ -74,24 +73,27 @@ const ProfitLeaderboard = () => {
               <h1>Profit Leaderboard 30Days</h1>
             </div>
           </div>
-          <table  className='w-full'>
-            <thead>
-              <tr className="w-full grid grid-cols-5 dark:bg-gray-700 py-2">
-                <th scope="col">ENS</th>
-                <th scope="col">Profit</th>
-                <th scope="col">Revernced</th>
-                <th scope="col">Spent</th>
-                <th scope="col">ROI</th>
-              </tr>
-            </thead>
-            <tbody className="rank-content w-full text-left">
-              {rankContent}
-            </tbody>
-          </table>
+          <div className="profit-table-container">
+            <div className="w-full relative min-w-max ">
+              <table className="w-full">
+                <thead>
+                  <tr className="grid grid-cols-5 dark:bg-gray-700 py-2">
+                    <th scope="col">ENS</th>
+                    <th scope="col">Profit</th>
+                    <th scope="col">Revernced</th>
+                    <th scope="col">Spent</th>
+                    <th scope="col">ROI</th>
+                  </tr>
+                </thead>
+                <tbody className="rank-content w-full text-left">
+                  {rankContent}
+                </tbody>
+              </table>
+            </div>
+          </div>
           <div className="m-auto w-full flex justify-between items-center px-8 pt-5">
             <select 
               onChange={handleSelectValue} 
-              defaultValue={10}
               value={limit}
               className="w-[80px] p-2 dark:bg-gray-700 flex justify-start items-center rounded-md">
               <option value="10">10</option>
