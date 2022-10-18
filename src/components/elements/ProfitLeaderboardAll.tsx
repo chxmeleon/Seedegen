@@ -61,7 +61,7 @@ const ProfitLeaderboard30D = () => {
       <section className='w-full py-5 max-w-[1440px]'>
         <div className='w-[93%] m-auto dark:bg-slate-800 pt-4 rounded-xl'>
           <div className="flex justify-between items-center w-full px-9">
-            <div className="font-semibold text-3xl p-10 text-gray-200">
+            <div className="font-semibold text-3xl py-10 text-gray-200">
               <div className="inline-flex">
                 <span className="pr-5">🚀</span>
                 <h1>Profit Leaderboard</h1>
@@ -79,8 +79,8 @@ const ProfitLeaderboard30D = () => {
           </div>
           <div className="profit-table-container">
             <div className="w-full relative min-w-max ">
-              <div className="grid grid-cols-5 px-10 py-2 gap-4 justify-items-center dark:bg-gray-700">
-                <div className="justify-self-start pl-4" >ENS</div>
+              <div className="grid grid-cols-5 pr-10  gap-4 justify-items-center items-center dark:bg-gray-700">
+                <div className="w-full justify-self-start sticky py-2 pl-10 left-0 z-50 dark:bg-gray-700" >ENS</div>
                 <div className="justify-self-end ">Profit(ETH)</div>
                 <div className="justify-self-end ">Revernced(ETH)</div>
                 <div className="justify-self-end ">Spent(ETH)</div>

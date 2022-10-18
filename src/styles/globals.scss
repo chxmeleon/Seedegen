@@ -8,16 +8,20 @@
 .profit-table-container {
   @apply overflow-x-auto overflow-y-hidden overscroll-x-contain snap-x scroll-px-12;
   &::-webkit-scrollbar {
-    @apply hidden
+    @apply h-1.5 bg-cyan-600;
+  }
+  &::-webkit-scrollbar-thumb {
+    @apply w-1/3 bg-amber-400 rounded-md;
   }
 }
 
-
 .progress-bar {
-  @apply absolute top-0 left-0 w-0 h-2 bg-cyan-500 rounded-sm transition-all duration-[350ms] delay-100 ease-in-out;
+  @apply absolute top-0 left-0 h-2 bg-cyan-500 rounded-sm transition-all duration-[350ms] delay-100 ease-in-out;
 }
-
 
 .rank-content > div:nth-child(2n) {
   @apply dark:bg-gray-700;
+  & > div:nth-child(1) {
+    @apply dark:bg-gray-700;
+  }
 }

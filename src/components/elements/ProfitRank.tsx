@@ -38,7 +38,7 @@ const ProfitRank = (props: RankProps) => {
   useEffect(() => {
     setTimeout(() => {
       setLoading(false)
-    }, 1500)
+    }, 1200)
   }, [loading])
 
 
@@ -47,11 +47,11 @@ const ProfitRank = (props: RankProps) => {
   const ProfitContent = ({ children, value, max }: any) => {
     const [width, setWidth] = useState(15)
     const remapRange = (value: any, max: any) => {
-      setWidth(Math.round((value/ max) * 80)) 
+      return Math.round((value/ max) * 80)
     }
 
     useEffect(() => {
-      remapRange(value, max)
+      setWidth(remapRange(value, max))
     }, [value, max])
 
     return (
@@ -64,9 +64,9 @@ const ProfitRank = (props: RankProps) => {
     )
   }
 
-  const loadingSkeleton = [...new Array(5)].map((_val, idx) => {
+  const loadingSkeleton = [...new Array(4)].map((_val, idx) => {
     return (
-      <div key={idx} className="w-1/2 py-1">
+      <div key={idx} className="w-3/4 py-1 justify-self-end ">
         <Skeleton
           animation="wave"
           className="h-4 bg-stone-300 dark:bg-gray-600"
@@ -78,15 +78,21 @@ const ProfitRank = (props: RankProps) => {
   return (
     <div
       id={id}
-      className="w-full grid grid-cols-5 px-10 gap-4 justify-items-center py-2" 
+      className="w-full grid grid-cols-5 gap-4 justify-items-center items-center pr-10 relative" 
     >
-    {loading && !data ? 
+    {!data && loading ? 
       <>
+        <div className="w-3/4 py-3">
+          <Skeleton
+            animation="wave"
+            className="h-4 bg-stone-300 dark:bg-gray-600"
+          />
+        </div>
         {loadingSkeleton}
       </>
       :
       <>
-        <div className="w-[170px] justify-self-start pl-4 truncate">
+        <div className="w-[190px] justify-self-start truncate sticky py-2 pl-10 left-0 z-50 dark:bg-slate-800">
           {ens}
         </div>
         <ProfitContent value={profit} max={maxProfit}>{profit}</ProfitContent>
