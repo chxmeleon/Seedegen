@@ -14,11 +14,10 @@
 
 
 .progress-bar {
-  @apply absolute w-0 top-0 left-0 h-2 bg-cyan-500 rounded-sm transition-all delay-75 duration-200 ease-linear;
-  -webkit-transition: width 1.6s ease;
+  @apply absolute top-0 left-0 h-2 bg-cyan-500 rounded-sm transition-all duration-300 ease-in-out;
 }
 
 
-.rank-content > tr:nth-child(2n) {
+.rank-content > div:nth-child(2n) {
   @apply dark:bg-gray-700;
 }
