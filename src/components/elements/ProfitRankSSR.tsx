@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react'
-import { Skeleton } from '@mui/material'
 
 type RankProps = {
   id: string
@@ -13,7 +12,6 @@ type RankProps = {
   maxRevernced: number
   maxProfit: number
   maxRoi: number
-  data: any
 }
 
 const ProfitRank = (props: RankProps) => {
@@ -29,7 +27,6 @@ const ProfitRank = (props: RankProps) => {
     maxRevernced,
     maxProfit,
     maxRoi,
-    data
   } = props
 
 
@@ -56,39 +53,21 @@ const ProfitRank = (props: RankProps) => {
     )
   }
 
-  const loadingSkeleton = [...new Array(5)].map((_val, idx) => {
-    return (
-      <div key={idx} className="w-1/2 py-1">
-        <Skeleton
-          animation="wave"
-          className="h-4 bg-stone-300 dark:bg-gray-600"
-        />
-      </div>
-    )
-  })
 
   return (
     <div
       id={id}
       className="w-full grid grid-cols-5 px-16 gap-4 justify-items-center py-2" 
     >
-    {loading && !data ? 
-      <>
-        {loadingSkeleton}
-      </>
-      :
-      <>
-        <div className="justify-self-start pl-4">
-          {ens}
-        </div>
-        <ProfitContent value={profit} max={maxProfit}>{profit}</ProfitContent>
-        <ProfitContent value={revernced} max={maxRevernced}>
-          {revernced}
-        </ProfitContent>
-        <ProfitContent value={spent} max={maxSpent}>{spent}</ProfitContent>
-        <ProfitContent value={roi} max={maxRoi}>{roi}</ProfitContent>
-      </>
-    }
+      <div className="justify-self-start pl-4">
+        {ens}
+      </div>
+      <ProfitContent value={profit} max={maxProfit}>{profit}</ProfitContent>
+      <ProfitContent value={revernced} max={maxRevernced}>
+        {revernced}
+      </ProfitContent>
+      <ProfitContent value={spent} max={maxSpent}>{spent}</ProfitContent>
+      <ProfitContent value={roi} max={maxRoi}>{roi}</ProfitContent>
     </div>
   )
 }
