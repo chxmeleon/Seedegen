@@ -18,3 +18,15 @@ model nftProfitLeaderboard30days {
   totalTradeTxCounts Int
   totalVolumes       Float
 }
+
+model nftProfitLeaderboardAll {
+  id                 String @id @default(auto()) @map("_id") @db.ObjectId
+  address            String
+  ens                String
+  profit             Float
+  received           Float
+  roi                Float
+  spent              Float
+  totalTradeTxCounts Int
+  totalVolumes       Float
+}

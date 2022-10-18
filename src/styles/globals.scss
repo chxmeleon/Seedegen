@@ -14,7 +14,7 @@
 
 
 .progress-bar {
-  @apply absolute top-0 left-0 h-2 bg-cyan-500 rounded-sm transition-all duration-300 ease-in-out;
+  @apply absolute top-0 left-0 w-0 h-2 bg-cyan-500 rounded-sm transition-all duration-[350ms] delay-100 ease-in-out;
 }
 
 
