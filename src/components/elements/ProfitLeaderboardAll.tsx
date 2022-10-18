@@ -8,13 +8,13 @@ import Stack from '@mui/material/Stack'
 const fetcher = (url: any) => axios.get(url).then((res: any) => res.data)
 
 const ProfitLeaderboard30D = () => {
-  const fullDataUrl = 'api/data/gain-rank-30days?limit=500' 
+  const fullDataUrl = 'api/data/gain-rank-all?limit=1000' 
   const { data: tradeData } = useSWR(fullDataUrl, fetcher)
 
   const [page, setPage] = useState(1)
   const [limit, setLimit] = useState(10)
   const offset = (page - 1) * 10 ?? 0
-  const count = 500 / limit
+  const count = 1000 / limit
   const handleChange = (e:any, v: any) => {setPage(v)}
   const handleSelectValue = (e:any) => {setLimit(e.target.value)}
   
@@ -61,9 +61,9 @@ const ProfitLeaderboard30D = () => {
       <section className='w-full py-5 max-w-[1440px]'>
         <div className='w-[93%] m-auto dark:bg-slate-800 pt-4 rounded-xl'>
           <div className="flex justify-between items-center w-full px-9">
-            <div className="font-semibold text-3xl p-10 pb-0 text-gray-200">
+            <div className="font-semibold text-3xl p-10 text-gray-200">
               <div className="inline-flex">
-                <span className="pr-5">🔥</span>
+                <span className="pr-5">🚀</span>
                 <h1>Profit Leaderboard</h1>
               </div>
             </div>
@@ -76,9 +76,6 @@ const ProfitLeaderboard30D = () => {
               <option value='50'>50</option>
               <option value='100'>100</option>
             </select>
-          </div>
-          <div className="font-normal text-sm pl-20 py-5">
-            <p>30Days Avg.profit</p>
           </div>
           <div className="profit-table-container">
             <div className="w-full relative min-w-max ">

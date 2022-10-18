@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { Skeleton } from '@mui/material'
 
 type RankProps = {
@@ -42,15 +42,23 @@ const ProfitRank = (props: RankProps) => {
   }, [loading])
 
 
+  
+
   const ProfitContent = ({ children, value, max }: any) => {
+    const [width, setWidth] = useState(5)
     const remapRange = (value: any, max: any) => {
-      return Math.round((value / max) * 80)
+      setWidth(Math.round((value/ max) * 80)) 
     }
+
+    useEffect(() => {
+      remapRange(value, max)
+    }, [value, max])
+
     return (
       <div className='relative w-full flex justify-end items-center'>
         <div className='pr-8'>{children}</div>
         <div className='relative w-[80px] h-2 bg-gray-600 rounded-sm'>
-          <div className="progress-bar" style={{ width: `${remapRange(value, max)}px` }}></div>
+          <div className="progress-bar" style={{ width: `${width}px` }}></div>
         </div>
       </div>
     )
@@ -78,13 +86,12 @@ const ProfitRank = (props: RankProps) => {
       </>
       :
       <>
-        <div className="justify-self-start pl-4">
+        <div className="w-[120px] justify-self-start pl-4 truncate">
           {ens}
         </div>
         <ProfitContent value={profit} max={maxProfit}>{profit}</ProfitContent>
         <ProfitContent value={revernced} max={maxRevernced}>
-          {revernced}
-        </ProfitContent>
+          {revernced}</ProfitContent>
         <ProfitContent value={spent} max={maxSpent}>{spent}</ProfitContent>
         <ProfitContent value={roi} max={maxRoi}>{roi}</ProfitContent>
       </>
