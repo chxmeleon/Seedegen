@@ -1,5 +1,5 @@
 .navbar-container {
-  @apply absolute z-[99] w-full px-6 flex justify-between items-center bg-gray-50/10 dark:bg-gray-900/10 backdrop-blur-sm;
+  @apply fixed top-0 z-[99] w-full px-6 flex justify-between items-center bg-gray-50 dark:bg-gray-900/95 backdrop-blur-sm dark:border-b-[0.5px] dark:border-b-gray-800;
 
   .navbar-right {
     @apply w-[26rem] flex justify-around items-center;

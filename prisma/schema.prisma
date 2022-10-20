@@ -8,7 +8,8 @@ datasource db {
 }
 
 model nftProfitLeaderboard30days {
-  id                 String @id @default(auto()) @map("_id") @db.ObjectId
+  id                 String   @id @default(auto()) @map("_id") @db.ObjectId
+  rank               String
   address            String
   ens                String
   profit             Float
@@ -17,10 +18,12 @@ model nftProfitLeaderboard30days {
   spent              Float
   totalTradeTxCounts Int
   totalVolumes       Float
+  createAt           DateTime
+  updateAt           DateTime
 }
 
 model nftProfitLeaderboardAll {
-  id                 String @id @default(auto()) @map("_id") @db.ObjectId
+  id                 String   @id @default(auto()) @map("_id") @db.ObjectId
   address            String
   ens                String
   profit             Float
@@ -29,4 +32,6 @@ model nftProfitLeaderboardAll {
   spent              Float
   totalTradeTxCounts Int
   totalVolumes       Float
+  createAt           DateTime
+  updateAt           DateTime
 }

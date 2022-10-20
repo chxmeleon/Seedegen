@@ -5,7 +5,6 @@ import ProfitLeaderboardAll from '../components/elements/ProfitLeaderboardAll'
 import Layout from '../components/layouts/Layout'
 
 const Analytics: NextPage = () => {
-
   const [loading, setLoading] = useState(true)
   useEffect(() => {
     setTimeout(() => {

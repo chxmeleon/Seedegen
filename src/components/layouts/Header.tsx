@@ -6,7 +6,7 @@ import { UserCircleIcon } from '@heroicons/react/24/solid'
 
 export default function Header() {
   return (
-    <header>
+    <header className="relative">
       <div className="navbar-container">
         <Link href="/">
           <a aria-label="News page link">

@@ -58,10 +58,10 @@ const ProfitLeaderboard30D = () => {
 
   return (
     <>
-      <section className='w-full py-5 max-w-[1440px]'>
-        <div className='w-[93%] m-auto dark:bg-slate-800 pt-4 rounded-xl'>
+      <section className='w-full py-5 max-w-[1440px] '>
+        <div className='transition-all duration-300 ease-in-out w-[93%] m-auto bg-neutral-100 drop-shadow-md border border-gray-200 dark:border-gray-800 dark:bg-slate-800 pt-4 rounded-xl'>
           <div className="flex justify-between items-center w-full px-9">
-            <div className="font-semibold text-3xl py-10 text-gray-200">
+            <div className="font-semibold text-3xl py-10 dark:text-gray-200">
               <div className="inline-flex">
                 <span className="pr-5">🔥</span>
                 <h1>Profit Leaderboard 30days</h1>

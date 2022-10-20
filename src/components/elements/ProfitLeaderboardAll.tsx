@@ -61,7 +61,7 @@ const ProfitLeaderboard30D = () => {
       <section className='w-full py-5 max-w-[1440px]'>
         <div className='w-[93%] m-auto dark:bg-slate-800 pt-4 rounded-xl'>
           <div className="flex justify-between items-center w-full px-9">
-            <div className="font-semibold text-3xl py-10 text-gray-200">
+            <div className="font-semibold text-3xl py-10 dark:text-gray-200">
               <div className="inline-flex">
                 <span className="pr-5">🚀</span>
                 <h1>Profit Leaderboard</h1>

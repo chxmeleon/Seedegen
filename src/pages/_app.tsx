@@ -2,8 +2,13 @@ import '../styles/globals.scss'
 import type { AppProps } from 'next/app'
 import { ThemeProvider } from 'next-themes'
 import Head from 'next/head'
+import { useEffect } from 'react'
 
 function MyApp({ Component, pageProps }: AppProps) {
+  useEffect(() => {
+    // window.history.scrollRestoration = 'manual'
+    window.scrollTo(0, 0)
+  })
   return (
     <>
       <Head>

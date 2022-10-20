@@ -83,6 +83,7 @@ const TrendingRankBoard = () => {
             size="large" 
             page={page} 
             onChange={handleChange}
+            onClick={() => {window.scroll(0,0)}}
             className="pagination"
             />
         </Stack>
