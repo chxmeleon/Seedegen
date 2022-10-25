@@ -11,6 +11,7 @@ const ProfitLeaderboard30D = () => {
   const fullDataUrl = 'api/data/gain-rank-all?limit=1000' 
   const { data: tradeData } = useSWR(fullDataUrl, fetcher)
 
+  
   const [page, setPage] = useState(1)
   const [limit, setLimit] = useState(10)
   const offset = (page - 1) * 10 ?? 0

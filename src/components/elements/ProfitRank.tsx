@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { Skeleton } from '@mui/material'
+import handle from '../../pages/api/data/gain-rank-30days'
 
 type RankProps = {
   id: string
@@ -29,27 +30,14 @@ const ProfitRank = (props: RankProps) => {
     maxRevernced,
     maxProfit,
     maxRoi,
-    data
+    data,
   } = props
-
-
-
-  const [loading, setLoading] = useState(true)
-  useEffect(() => {
-    setTimeout(() => {
-      setLoading(false)
-    }, 1200)
-  }, [loading])
-
-
-  
 
   const ProfitContent = ({ children, value, max }: any) => {
     const [width, setWidth] = useState(15)
     const remapRange = (value: any, max: any) => {
-      return Math.round((value/ max) * 80)
+      return Math.round((value / max) * 80)
     }
-
     useEffect(() => {
       setWidth(remapRange(value, max))
     }, [value, max])
@@ -58,7 +46,7 @@ const ProfitRank = (props: RankProps) => {
       <div className='relative w-full flex justify-end items-center'>
         <div className='pr-8'>{children}</div>
         <div className='relative w-[80px] h-2 bg-gray-600 rounded-sm'>
-          <div className="progress-bar" style={{ width: `${width}px` }}></div>
+          <div className='progress-bar' style={{ width: `${width}px` }}></div>
         </div>
       </div>
     )
@@ -66,10 +54,10 @@ const ProfitRank = (props: RankProps) => {
 
   const loadingSkeleton = [...new Array(4)].map((_val, idx) => {
     return (
-      <div key={idx} className="w-3/4 py-1 justify-self-end ">
+      <div key={idx} className='w-3/4 py-1 justify-self-end '>
         <Skeleton
-          animation="wave"
-          className="h-4 bg-stone-300 dark:bg-gray-600"
+          animation='wave'
+          className='h-4 bg-stone-300 dark:bg-gray-600'
         />
       </div>
     )
@@ -78,30 +66,37 @@ const ProfitRank = (props: RankProps) => {
   return (
     <div
       id={id}
-      className="w-full grid grid-cols-5 gap-4 justify-items-center items-center pr-10 relative" 
+      className='w-full grid grid-cols-5 gap-4 justify-items-center items-center pr-10 relative'
     >
-    {!data && loading ? 
-      <>
-        <div className="w-3/4 py-3">
-          <Skeleton
-            animation="wave"
-            className="h-4 bg-stone-300 dark:bg-gray-600"
-          />
-        </div>
-        {loadingSkeleton}
-      </>
-      :
-      <>
-        <div className="w-[190px] justify-self-start truncate sticky py-2 pl-10 left-0 z-50 dark:bg-slate-800">
-          {ens}
-        </div>
-        <ProfitContent value={profit} max={maxProfit}>{profit}</ProfitContent>
-        <ProfitContent value={revernced} max={maxRevernced}>
-          {revernced}</ProfitContent>
-        <ProfitContent value={spent} max={maxSpent}>{spent}</ProfitContent>
-        <ProfitContent value={roi} max={maxRoi}>{roi}</ProfitContent>
-      </>
-    }
+      {!data ? (
+        <>
+          <div className='w-3/4 py-3'>
+            <Skeleton
+              animation='wave'
+              className='h-4 bg-stone-300 dark:bg-gray-600'
+            />
+          </div>
+          {loadingSkeleton}
+        </>
+      ) : (
+        <>
+          <div className='w-[190px] justify-self-start truncate sticky py-2 pl-10 left-0 z-50 dark:bg-slate-800'>
+            {ens}
+          </div>
+          <ProfitContent value={profit} max={maxProfit}>
+            {profit}
+          </ProfitContent>
+          <ProfitContent value={revernced} max={maxRevernced}>
+            {revernced}
+          </ProfitContent>
+          <ProfitContent value={spent} max={maxSpent}>
+            {spent}
+          </ProfitContent>
+          <ProfitContent value={roi} max={maxRoi}>
+            {roi}
+          </ProfitContent>
+        </>
+      )}
     </div>
   )
 }
