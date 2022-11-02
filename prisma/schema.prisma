@@ -24,6 +24,7 @@ model nftProfitLeaderboard30days {
 
 model nftProfitLeaderboardAll {
   id                 String   @id @default(auto()) @map("_id") @db.ObjectId
+  rank               String
   address            String
   ens                String
   profit             Float
@@ -34,4 +35,25 @@ model nftProfitLeaderboardAll {
   totalVolumes       Float
   createAt           DateTime
   updateAt           DateTime
+}
+
+model winAndLose {
+  id                  String @id @default(auto()) @map("_id") @db.ObjectId
+  rank                String
+  walletAddress       String
+  walletOpenseaUrl    String
+  walletEtherscanUrl  String
+  projectEtherscanUrl String
+  projectAddress      String
+  tokenId             String
+  buyTxHash           String
+  buyTxHashUrl        String
+  sellTxHash          String
+  sellTxHashUrl       String
+  status              String
+  cost                Float
+  got                 Float
+  net                 Float
+  createdAt           DateTime
+  updatedAt           DateTime
 }
