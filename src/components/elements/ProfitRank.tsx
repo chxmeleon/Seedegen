@@ -1,6 +1,8 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { Skeleton } from '@mui/material'
 import handle from '../../pages/api/data/gain-rank-30days'
+import Link from 'next/link'
+
 
 type RankProps = {
   id: string
@@ -38,6 +40,7 @@ const ProfitRank = (props: RankProps) => {
     const remapRange = (value: any, max: any) => {
       return Math.round((value / max) * 80)
     }
+
     useEffect(() => {
       setWidth(remapRange(value, max))
     }, [value, max])
@@ -63,41 +66,46 @@ const ProfitRank = (props: RankProps) => {
     )
   })
 
+  const traderUrl = `/address/${address}`
   return (
-    <div
-      id={id}
-      className="grid relative grid-cols-5 gap-4 justify-items-center items-center pr-10 w-full"
-    >
-      {!data ? (
-        <>
-          <div className="py-3 w-3/4">
-            <Skeleton
-              animation="wave"
-              className="h-4 dark:bg-gray-600 bg-stone-300"
-            />
-          </div>
-          {loadingSkeleton}
-        </>
-      ) : (
-        <>
-          <div className="sticky left-0 z-50 justify-self-start py-2 pl-10 w-[190px] truncate dark:bg-slate-800">
-            {ens}
-          </div>
-          <ProfitContent value={profit} max={maxProfit}>
-            {profit}
-          </ProfitContent>
-          <ProfitContent value={revernced} max={maxRevernced}>
-            {revernced}
-          </ProfitContent>
-          <ProfitContent value={spent} max={maxSpent}>
-            {spent}
-          </ProfitContent>
-          <ProfitContent value={roi} max={maxRoi}>
-            {roi}
-          </ProfitContent>
-        </>
-      )}
-    </div>
+    <Link href={traderUrl}>
+      <a aria-label="opensea link" target="_blank" rel="noopener">
+        <div
+          id={id}
+          className="grid relative grid-cols-5 gap-4 justify-items-center items-center pr-10 w-full hover:cursor-pointer"
+        >
+          {!data ? (
+            <>
+              <div className="py-3 w-3/4">
+                <Skeleton
+                  animation="wave"
+                  className="h-4 dark:bg-gray-600 bg-stone-300"
+                />
+              </div>
+              {loadingSkeleton}
+            </>
+          ) : (
+            <>
+              <div className="sticky left-0 z-50 justify-self-start py-2 pl-10 w-[190px] truncate dark:bg-slate-800">
+                {ens}
+              </div>
+              <ProfitContent value={profit} max={maxProfit}>
+                {profit}
+              </ProfitContent>
+              <ProfitContent value={revernced} max={maxRevernced}>
+                {revernced}
+              </ProfitContent>
+              <ProfitContent value={spent} max={maxSpent}>
+                {spent}
+              </ProfitContent>
+              <ProfitContent value={roi} max={maxRoi}>
+                {roi}
+              </ProfitContent>
+            </>
+          )}
+        </div>
+      </a>
+    </Link>
   )
 }
 

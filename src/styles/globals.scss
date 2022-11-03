@@ -19,9 +19,11 @@
   @apply absolute top-0 left-0 h-2 bg-cyan-500 rounded-sm transition-all duration-[350ms] delay-100 ease-in-out;
 }
 
-.rank-content > div:nth-child(2n) {
+.rank-content > a:nth-child(2n) > div {
   @apply dark:bg-gray-700;
   & > div:nth-child(1) {
     @apply dark:bg-gray-700;
   }
 }
+
+
