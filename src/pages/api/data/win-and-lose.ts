@@ -13,7 +13,6 @@ export default async function handle(req: NextApiRequest, res: NextApiResponse) 
       walletAddress: address
     },
     select: {
-      rank: true,
       walletAddress: true,
       walletOpenseaUrl: true,
       walletEtherscanUrl: true,

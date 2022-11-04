@@ -5,8 +5,10 @@ const Discover: NextPage = () => {
   return (
     <>
       <Layout>
-        <div className="flex justify-center items-center h-screen">
-          Discover
+        <div className="flex h-screen">
+          <div className="m-auto">
+            Discover
+          </div>
         </div>
       </Layout>
     </>

@@ -4,6 +4,7 @@ import { useState } from 'react'
 import ProfitRank from './ProfitRank'
 import Pagination from '@mui/material/Pagination'
 import Stack from '@mui/material/Stack'
+import { useEnsName } from 'wagmi'
 
 const fetcher = (url: any) => axios.get(url).then((res: any) => res.data)
 
@@ -40,13 +41,14 @@ const ProfitLeaderboard30D = () => {
     const maxRevernced = maxValueList[1]
     const maxSpent = maxValueList[2]
     const maxRoi = maxValueList[3]
+    const address = allData?.address
 
     return (
       <ProfitRank
         key={idx.toString()}
         id={(idx + 1).toString()}
         ens={allData?.ens}
-        address={allData?.address}
+        address={address}
         spent={spent}
         revernced={revernced}
         profit={profit}
