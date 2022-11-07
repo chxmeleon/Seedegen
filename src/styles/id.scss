@@ -1,0 +1,16 @@
+.mini-dashboard-grid {
+  @apply grid grid-cols-3 gap-3 justify-items-center items-center p-3 w-full dark:bg-slate-800 rounded-lg h-[250px];
+  & > div > div > p:nth-child(1) {
+    @apply font-bold pb-3 dark:text-cyan-400;
+  }
+  & > div > div > p {
+    @apply dark:text-gray-200 ;
+  }
+}
+
+.win-lose-data-content > div:nth-child(2n) {
+  @apply dark:bg-gray-700;
+  & > div:nth-child(1) {
+    @apply dark:bg-gray-700;
+  }
+}

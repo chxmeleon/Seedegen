@@ -1,6 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { Skeleton } from '@mui/material'
-import handle from '../../pages/api/data/gain-rank-30days'
 import Link from 'next/link'
 
 
