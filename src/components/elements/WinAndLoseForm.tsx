@@ -11,6 +11,8 @@ type FormProps = {
   status: string
   spentTxHashUrl: string
   recerncedTxHashUrl: string
+  project: string
+  tokenId: string
 }
 
 const WinAndLoseForm = (props: FormProps) => {
@@ -22,6 +24,8 @@ const WinAndLoseForm = (props: FormProps) => {
     status,
     spentTxHashUrl,
     recerncedTxHashUrl,
+    project,
+    tokenId
   } = props
 
   const loadingSkeleton = [...new Array(4)].map((_val, idx) => {
@@ -40,11 +44,13 @@ const WinAndLoseForm = (props: FormProps) => {
   return (
     <div
       id={id}
-      className="grid relative grid-cols-5 gap-4 py-[6px] justify-items-center items-center pr-10 w-full"
+      className="grid relative grid-cols-7 gap-4 py-[6px] justify-items-center items-center pr-10 w-full"
     > 
       <div className="justify-self-start pl-12">
         {status}
       </div>
+      <div className="truncate w-[90%]">{project}</div>
+      <div>{tokenId}</div>
       <div>{profit.toFixed(4)}</div>
       <div className="inline-flex items-center">
         <div>{spent.toFixed(4)}</div>
