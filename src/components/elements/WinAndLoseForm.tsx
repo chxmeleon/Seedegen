@@ -56,7 +56,7 @@ const WinAndLoseForm = (props: FormProps) => {
         <div>{spent.toFixed(4)}</div>
         <div className="px-2 w-full">
           <Link href={spentTxHashUrl}>
-            <a target="_blank" rel="noopener"  >
+            <a target="_blank" rel="noopener noreferrer">
               <ArrowUpRightIcon className="w-4" />
             </a>
           </Link>
@@ -66,7 +66,7 @@ const WinAndLoseForm = (props: FormProps) => {
         <div>{revernced.toFixed(4)}</div>
         <div className="px-2 w-full">
           <Link href={recerncedTxHashUrl}>
-            <a target="_blank" rel="noopener">
+            <a target="_blank" rel="noopener noreferrer">
               <ArrowUpRightIcon className="w-4" />
             </a>
           </Link>

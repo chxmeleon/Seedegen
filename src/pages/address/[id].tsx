@@ -9,6 +9,7 @@ import WinAndLoseForm from '../../components/elements/WinAndLoseForm'
 import Pagination from '@mui/material/Pagination'
 import Stack from '@mui/material/Stack'
 import { Console } from 'console'
+import { number } from 'yup/lib/locale'
 const collections = require('../../config/project')
 
 const Trader = (props: any) => {
@@ -35,7 +36,7 @@ const Trader = (props: any) => {
   const offset = (page - 1) * 10 ?? 0
   const counts = Math.ceil(winLoseData.length / 10)
 
-  const handleChange = (e: any, v: any) => {
+  const handleChange = (e: React.ChangeEvent<unknown>, v: number) => {
     setPage(v)
   }
 
@@ -107,7 +108,7 @@ const Trader = (props: any) => {
     labels: ['Total Profit', 'Total Spent', 'Total Received', 'Gas Spent'],
     datasets: [
       {
-        data: [totalProfit, totalSpent, totalReceived, totalRoi * 50],
+        data: [totalProfit, totalSpent, totalReceived, totalSpent / 10],
         borderColor: ['#22d3ee'],
         backgroundColor: ['#22d3ee'],
         borderWidth: 1,
@@ -136,7 +137,7 @@ const Trader = (props: any) => {
                       <a
                         aria-label="trader opensea link"
                         target="_blank"
-                        rel="noopener"
+                        rel="noopener noreferrer"
                       >
                         <div>opensea</div>
                       </a>
@@ -145,7 +146,7 @@ const Trader = (props: any) => {
                       <a
                         aria-label="trader etherscan link"
                         target="_blank"
-                        rel="noopener"
+                        rel="noopener noreferrer"
                       >
                         <div>etherscan</div>
                       </a>
@@ -196,7 +197,7 @@ const Trader = (props: any) => {
               <DashContainer>
                 <div>
                   <p>Gas Spent</p>
-                  <p>{totalRoi * 50} ETH</p>
+                  <p>{totalSpent / 10} ETH</p>
                 </div>
               </DashContainer>
             </div>

@@ -68,7 +68,7 @@ const ProfitRank = (props: RankProps) => {
   const traderUrl = `/address/${address}`
   return (
     <Link href={traderUrl}>
-      <a aria-label="opensea link" target="_blank" rel="noopener">
+      <a aria-label="opensea link" target="_blank" rel="noopener noreferrer">
         <div
           id={id}
           className="grid relative grid-cols-5 gap-4 justify-items-center items-center pr-10 w-full hover:cursor-pointer"
