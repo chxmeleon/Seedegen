@@ -13,9 +13,13 @@ const fetcher = (url: RequestInfo | URL) => fetch(url).then((r) => r.json())
 const Search = () => {
   const router = useRouter()
 
-  const apiUrl = 'api/data/win-and-lose?offset=0&limit=10'
+  const apiUrl = 'api/data/buy-and-sell'
 
-  const { data: winAndLose } = useSWR(apiUrl, fetcher)
+  const { data: buyAndSellData } = useSWR(apiUrl, fetcher)
+  
+  const buyData = buyAndSellData?.buyTransaction
+  const sellData = buyAndSellData?.sellTransaction
+  const buyAndSellArray = buyData?.concat(sellData).sort(() => Math.random() - 0.5)
   
 
   return (
@@ -27,7 +31,7 @@ const Search = () => {
         <section className="w-full">
           <div className="flex items-center w-full pt-20">
             <div className="m-auto w-full pb-10">
-              <SearchResult results={winAndLose} />
+              <SearchResult results={buyAndSellArray} />
             </div>
           </div>
         </section>
