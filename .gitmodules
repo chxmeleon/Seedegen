@@ -1,3 +1,5 @@
 [submodule "crawler"]
 	path = crawler
 	url = git@github.com:chxmeleon/icu-crawler.git
+  ignore = dirty
+
