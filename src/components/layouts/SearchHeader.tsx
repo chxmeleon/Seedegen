@@ -10,16 +10,14 @@ export default function SearchHeader() {
   return (
     <header className="relative">
       <div className="navbar-container">
-        <div className="flex items-center">
           <Link href="/">
             <a aria-label="News page link">
               <h1 className="font-bold text-2xl">ICU</h1>
             </a>
           </Link>
-          <div className="pl-[135px]">
+          <div className="pl-24">
             <SearchBar />
           </div>
-        </div>
         <ul className="navbar-right">
           <li>
             <Link href="/Analytics" >

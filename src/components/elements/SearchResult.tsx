@@ -1,49 +1,60 @@
 import React, { useState } from 'react'
 import Pagination from '@mui/material/Pagination'
 import Stack from '@mui/material/Stack'
+import { number } from 'yup'
+import {
+  HeartIcon,
+  ChatBubbleLeftIcon,
+  ArrowUpOnSquareIcon,
+  BookmarkIcon,
+  EllipsisHorizontalCircleIcon,
+} from '@heroicons/react/24/outline'
 
 const SearchResult = ({ results }: any) => {
-  const [page, setPage] = useState(1)
-  const offset = (page - 1) * 10 ?? 0
-  const counts = 10
-
-  const handleChange = (e: React.ChangeEvent<unknown>, v: number) => {
-    setPage(v)
-  }
+  console.log(results?.[0])
 
   return (
     <section className="flex items-center w-full">
-      <div className="px-48 max-w-[1300px]">
-        <div className="w-2/3">
-          {results.news.map((result: any) => (
+      <div className="m-auto w-full max-w-[1300px] ">
+        <div className="w-[45%] ml-[20%]">
+          {results?.map((result: any, idx: number) => (
             <li
-              className="px-5 my-4 h-36 list-none rounded-md bg-slate-800"
-              key={result.id}
+              className="p-6 py-8 list-none my-4 dark:bg-slate-800/50"
+              key={idx}
             >
-              <div className="py-3">
-                <a href={result.link} target="_blank" rel="noopener noreferrer">
-                  <p className="w-1/3 text-xs truncate">{result.link}</p>
-                </a>
-                <a href={result.link} target="_blank" rel="noopener noreferrer">
-                  <h1 className="pt-2 pb-3 w-2/3 text-2xl font-semibold truncate">
-                    {result.title}
-                  </h1>
-                </a>
-                <p className="pr-3 truncate">{result.slug}</p>
+              <div className="flex justify-between items-start">
+                <div className="inline-flex items-center">
+                  <div className="flex overflow-hidden w-16 h-16 bg-amber-50 rounded-full">
+                    <span className="m-auto text-5xl font-bold text-zinc-600"></span>
+                  </div>
+                  <a
+                    href={result.walletEtherscanUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <h1 className="pl-8 text-2xl font-semibold">
+                      {result.walletAddress.slice(0, 4) +
+                        '...' +
+                        result.walletAddress.slice(-4)}
+                    </h1>
+                  </a>
+                </div>
+                <EllipsisHorizontalCircleIcon className="w-7" />
+              </div>
+              <div className="pb-5 pt-10 px-1">
+                <p>Buy</p>
+                <p>{result.cost}</p>
+              </div>
+              <div className="inline-flex justify-between items-center pt-9 w-full">
+                <div className="inline-flex justify-between items-center w-1/3">
+                  <ChatBubbleLeftIcon className="w-7" />
+                  <HeartIcon className="w-7" />
+                  <ArrowUpOnSquareIcon className="w-7" />
+                </div>
+                <BookmarkIcon className="w-7" />
               </div>
             </li>
           ))}
-        </div>
-        <div className="pt-3 w-full dark:text-white">
-          <Stack spacing={2}>
-            <Pagination
-              count={counts}
-              size="large"
-              page={page}
-              onChange={handleChange}
-              className="pagination"
-            />
-          </Stack>
         </div>
       </div>
     </section>
