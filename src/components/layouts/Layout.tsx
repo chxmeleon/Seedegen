@@ -19,7 +19,11 @@ const Layout = ({ children }: Props) => {
           <Header />
       }
         {children}
-        <Footer />
+        {useRouter().route === '/search' ? 
+          null
+        : 
+          <Footer />
+        }
       </section>
     </>
   )

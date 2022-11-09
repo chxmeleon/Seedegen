@@ -9,9 +9,9 @@ export default async function handle(req: NextApiRequest, res: NextApiResponse) 
   const winLose = await prisma.winAndLose.findMany({
     skip: offset,
     take: limit,
-    where: {
-      walletAddress: address
-    },
+    // where: {
+    //   walletAddress: address
+    // },
     select: {
       walletAddress: true,
       walletOpenseaUrl: true,

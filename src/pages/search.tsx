@@ -6,11 +6,18 @@ import { GetServerSideProps } from 'next'
 import Head from 'next/head';
 import SearchResult from '../components/elements/SearchResult';
 import SearchBar from '../components/elements/SearchBar';
+import useSWR from 'swr'
 
+const fetcher = (url: RequestInfo | URL) => fetch(url).then((r) => r.json())
 
-
-const Search = ({ results }:any) => {
+const Search = () => {
   const router = useRouter()
+
+  const apiUrl = 'api/data/win-and-lose?offset=0&limit=10'
+
+  const { data: winAndLose } = useSWR(apiUrl, fetcher)
+  
+
   return (
     <>
       <Head>
@@ -19,8 +26,8 @@ const Search = ({ results }:any) => {
       <Layout>
         <section className="w-full">
           <div className="flex items-center w-full pt-20">
-            <div className="m-auto w-full py-10">
-              <SearchResult results={results} />
+            <div className="m-auto w-full pb-10">
+              <SearchResult results={winAndLose} />
             </div>
           </div>
         </section>
@@ -32,29 +39,3 @@ const Search = ({ results }:any) => {
 }
 
 export default Search
-
-
-export const getServerSideProps: GetServerSideProps = async (context) => {
-  const options = {
-    method: 'GET',
-    url: 'https://crypto-news-live11.p.rapidapi.com/news/nft',
-    params: { page: '1', per_page: '12' },
-    headers: {
-      'X-RapidAPI-Key': '74e6c313e1msh265e7c4417b96ffp14c59ejsn4340171da7e8',
-      'X-RapidAPI-Host': 'crypto-news-live11.p.rapidapi.com',
-    },
-  }
-
-  const data = await axios
-    .request(options)
-    .then(function(response) {
-      return response.data
-    })
-
-  return {
-    props: {
-      results: data,
-    }
-  }
-}
-
