@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import prisma from '../../lib/prisma'
 import { GetServerSideProps } from 'next'
 import Layout from '../../components/layouts/Layout'
@@ -8,8 +8,6 @@ import Link from 'next/link'
 import WinAndLoseForm from '../../components/elements/WinAndLoseForm'
 import Pagination from '@mui/material/Pagination'
 import Stack from '@mui/material/Stack'
-import { Console } from 'console'
-import { number } from 'yup/lib/locale'
 const collections = require('../../config/project')
 
 const Trader = (props: any) => {
@@ -36,8 +34,8 @@ const Trader = (props: any) => {
   const offset = (page - 1) * 10 ?? 0
   const counts = Math.ceil(winLoseData.length / 10)
 
-  const handleChange = (e: React.ChangeEvent<unknown>, v: number) => {
-    setPage(v)
+  const handleChange = (e: React.ChangeEvent<unknown>, n: number) => {
+    setPage(n)
   }
 
   const currentPage = winLoseData?.slice(offset, 10 + offset)
