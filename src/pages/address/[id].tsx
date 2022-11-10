@@ -44,13 +44,7 @@ const Trader = (props: any) => {
 
   const winLoseBoard = currentPage.map((data: any, idx: any) => {
     const status = data?.status.toLowerCase()
-    const transMode = () => {
-      if (status === 'win') {
-        return '🏆 Win'
-      } else {
-        return '💸 Lose'
-      }
-    }
+    const transMode = status === 'win' ? '🏆 Win' : '💸 Lose'
     const spent = data?.cost
     const revernced = data?.got
     const profit = data?.net
@@ -58,11 +52,10 @@ const Trader = (props: any) => {
     const sellTxHashUrl = data?.sellTxHashUrl
     const tokenId = data?.tokenId
     const project = data?.projectAddress
-
-    const projectName = () => {
-      const all = collections.find((x: any) => x.address === project)
-      return all?.project ?? project.slice(0, 4) + '...' + project.slice(-4)
-    }
+    const defaultProjectName = `${project.slice(0, 4)}...${project.slice(-4)}`
+    const projectName =
+      collections.find((item: any) => item.address === project)?.project ??
+      defaultProjectName
 
     return (
       <WinAndLoseForm
@@ -70,11 +63,11 @@ const Trader = (props: any) => {
         id={'winlose-' + idx.toString()}
         spent={spent}
         revernced={revernced}
-        status={transMode()}
+        status={transMode}
         profit={profit}
         spentTxHashUrl={buyTxHashUrl}
         recerncedTxHashUrl={sellTxHashUrl}
-        project={projectName()}
+        project={projectName}
         tokenId={tokenId}
       />
     )
