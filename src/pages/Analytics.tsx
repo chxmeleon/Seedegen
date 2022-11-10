@@ -1,23 +1,18 @@
 import type { NextPage } from 'next'
 import { useEffect, useState } from 'react'
-import ProfitLeaderboard30D from '../components/elements/ProfitLeaderboard30D'
-import ProfitLeaderboardAll from '../components/elements/ProfitLeaderboardAll'
-import ProfitLeaderboard from '../components/elements/ProfitLeaderboard'
-import Layout from '../components/layouts/Layout'
 import useSWR from 'swr'
 import axios from 'axios'
+import ProfitLeaderboard from '../components/elements/ProfitLeaderboard'
+import Layout from '../components/layouts/Layout'
 
 const fetcher = (url: any) => axios.get(url).then((res: any) => res.data)
 
 const Analytics: NextPage = () => {
-
   const data30dUrl = 'api/data/gain-rank-30days?limit=500'
   const { data: tradeData30 } = useSWR(data30dUrl, fetcher)
 
-
   const dataAllUrl = 'api/data/gain-rank-all?limit=1000'
   const { data: tradeDataAll } = useSWR(dataAllUrl, fetcher)
-
 
   const [loading, setLoading] = useState(true)
   useEffect(() => {
@@ -26,18 +21,22 @@ const Analytics: NextPage = () => {
     }, 500)
   }, [loading])
 
-
-
-
-
   return (
     <>
       <Layout>
-        <div className="w-full m-auto pt-32 pb-4 px-12 flex flex-col justify-center items-center">
-          <div className={`${loading ? "opacity-0 translate-y-20" : "opacity-100"} w-full m-auto flex justify-center transition-all duration-700 ease-in-out delay-75`}>
+        <div className="flex flex-col justify-center items-center px-12 pt-32 pb-4 m-auto w-full">
+          <div
+            className={`${
+              loading ? 'opacity-0 translate-y-20' : 'opacity-100'
+            } w-full m-auto flex justify-center transition-all duration-700 ease-in-out delay-75`}
+          >
             <ProfitLeaderboard tradeData={tradeData30} />
           </div>
-          <div className={`${loading ? "opacity-0 translate-y-20" : "opacity-100"} w-full m-auto flex justify-center transition-all duration-700 ease-in-out delay-300`}>
+          <div
+            className={`${
+              loading ? 'opacity-0 translate-y-20' : 'opacity-100'
+            } w-full m-auto flex justify-center transition-all duration-700 ease-in-out delay-300`}
+          >
             <ProfitLeaderboard tradeData={tradeDataAll} />
           </div>
         </div>
@@ -46,4 +45,4 @@ const Analytics: NextPage = () => {
   )
 }
 
-export default Analytics 
+export default Analytics
