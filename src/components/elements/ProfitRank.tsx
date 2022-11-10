@@ -88,17 +88,17 @@ const ProfitRank = (props: RankProps) => {
               <div className="sticky left-0 z-50 justify-self-start py-2 pl-10 w-[190px] truncate dark:bg-slate-800">
                 {ens}
               </div>
-              <ProfitContent value={profit} max={maxProfit}>
-                {profit}
+              <ProfitContent value={profit.toFixed(2)} max={maxProfit}>
+                {profit.toFixed(2)}
               </ProfitContent>
-              <ProfitContent value={revernced} max={maxRevernced}>
-                {revernced}
+              <ProfitContent value={revernced.toFixed(2)} max={maxRevernced}>
+                {revernced.toFixed(2)}
               </ProfitContent>
-              <ProfitContent value={spent} max={maxSpent}>
-                {spent}
+              <ProfitContent value={spent.toFixed(2)} max={maxSpent}>
+                {spent.toFixed(2)}
               </ProfitContent>
-              <ProfitContent value={roi} max={maxRoi}>
-                {roi}
+              <ProfitContent value={roi.toFixed(2)} max={maxRoi}>
+                {roi.toFixed(2)}
               </ProfitContent>
             </>
           )}
