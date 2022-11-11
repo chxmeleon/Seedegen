@@ -38,7 +38,7 @@ model nftProfitLeaderboardAll {
 }
 
 model winAndLose {
-  id                  String @id @default(auto()) @map("_id") @db.ObjectId
+  id                  String   @id @default(auto()) @map("_id") @db.ObjectId
   rank                String
   walletAddress       String
   walletOpenseaUrl    String
@@ -46,8 +46,10 @@ model winAndLose {
   projectEtherscanUrl String
   projectAddress      String
   tokenId             String
+  buyTime             String
   buyTxHash           String
   buyTxHashUrl        String
+  sellTime            String
   sellTxHash          String
   sellTxHashUrl       String
   status              String
