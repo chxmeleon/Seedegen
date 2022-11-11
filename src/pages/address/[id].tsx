@@ -4,26 +4,34 @@ import { GetServerSideProps } from 'next'
 import Layout from '../../components/layouts/Layout'
 import { Bar, Doughnut } from 'react-chartjs-2'
 import tw from 'twin.macro'
+import useSWR from 'swr'
+import axios from 'axios'
 import Link from 'next/link'
 import WinAndLoseForm from '../../components/elements/WinAndLoseForm'
 import Pagination from '@mui/material/Pagination'
 import Stack from '@mui/material/Stack'
+import { useRouter } from 'next/router'
 const collections = require('../../config/project')
+
+const fetcher = (url: any) => axios.get(url).then((res: any) => res.data)
 
 const Trader = (props: any) => {
   const { winLoseData, rankMergeData } = props
   const rankData = rankMergeData?.[0]
+  const router = useRouter()
+  const queryOffset = router.query.offset 
+
 
   const etherscanUrl = winLoseData?.[0]?.walletEtherscanUrl
   const openseaUrl = winLoseData?.[0]?.walletOpenseaUrl
-  const ens = rankData.ens
-  const totalProfit = rankData.profit.toFixed(2)
-  const totalSpent = rankData.spent.toFixed(2)
-  const totalReceived = rankData.received.toFixed(2)
-  const totalRoi = rankData.roi.toFixed(2)
-  const avatarText = ens.slice(0, 1).toUpperCase()
+  const ens = rankData?.ens
+  const totalProfit = rankData?.profit.toFixed(2)
+  const totalSpent = rankData?.spent.toFixed(2)
+  const totalReceived = rankData?.received.toFixed(2)
+  const totalRoi = rankData?.roi.toFixed(2)
+  const avatarText = ens?.slice(0, 1).toUpperCase()
   const address = winLoseData?.[0]?.walletAddress.toString()
-  const shortAddress = address.slice(0, 4) + '...' + address.slice(-4)
+  const shortAddress = address?.slice(0, 4) + '...' + address?.slice(-4)
   const statusArray = winLoseData.map((item: any) => item.status.toLowerCase())
   const winCounts = statusArray.filter(
     (value: string) => value === 'win'
@@ -245,7 +253,10 @@ const Trader = (props: any) => {
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const address = context.query.id?.toString() || ''
+
   const winLose = await prisma.winAndLose.findMany({
+    // take: limit,
+    // skip: offset,
     where: {
       walletAddress: address,
     },
