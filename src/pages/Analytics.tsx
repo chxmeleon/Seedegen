@@ -14,6 +14,14 @@ const Analytics: NextPage = () => {
   const dataAllUrl = 'api/data/gain-rank-all?limit=1000'
   const { data: tradeDataAll } = useSWR(dataAllUrl, fetcher)
 
+
+
+  
+
+
+
+
+
   const [loading, setLoading] = useState(true)
   useEffect(() => {
     setTimeout(() => {
