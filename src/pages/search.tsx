@@ -23,19 +23,25 @@ const Search = () => {
     obj.blockTime = obj.buyTime
     return obj
   })
-
+  
+  
   const newSellData = sellData?.map((obj: any) => {
     obj.blockTime = obj.sellTime
     return obj
   })
 
-  const buyAndSellArray = newBuyData?.concat(newSellData)
+  const buyAndSellArray = Array.from(new Set(newBuyData?.concat(newSellData)))
   const finalData = orderBy(buyAndSellArray, ['blockTime'], ['desc'])
+  console.log(finalData);
+  
 
   return (
     <>
       <Head>
-        <title>{router.query.q} - ICU Search</title>
+        <title>
+          {router.query?.q}
+          - ICU Search
+        </title>
       </Head>
       <Layout>
         <section className="w-full">

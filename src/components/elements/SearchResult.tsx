@@ -43,15 +43,53 @@ const SearchResult = ({ results }: any) => {
                 {Object.keys(result).find((keys) => keys === 'cost') ===
                 'cost' ? (
                   <>
-                    <p>{result.buyTime}</p>
-                    <p>Buy</p>
-                    <p>{result.cost}</p>
+                    <div className="pb-6">
+                      <img
+                        src={`https://storage.googleapis.com/nftimagebucket/tokens/${result.projectAddress}/preview/${result.tokenId}.png`}
+                        alt="nft image"
+                      />
+                    </div>
+                    <div className="flex justify-between pb-4 w-full font-semibold">
+                      <p>Buy</p>
+                      <p>{result.buyTime}</p>
+                    </div>
+                    <p className="font-medium">{result.cost} ETH</p>
+                    <a
+                      href={result.buyTxHashUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      <p className="font-medium">{result.tokenId}</p>
+                    </a>
+                    <p>{result.projectAddress}</p>
                   </>
                 ) : (
                   <>
-                    <p>{result.sellTime}</p>
-                    <p>Sell</p>
-                    <p>{result.got}</p>
+                    <p className="pb-6">{result.projectAddress}</p>
+                    <div className="pb-6">
+                      <img
+                        src={`https://storage.googleapis.com/nftimagebucket/tokens/${result.projectAddress}/preview/${result.tokenId}.png`}
+                        alt="nft image"
+                      />
+                    </div>
+                    <div className="flex justify-between pb-4 w-full font-semibold">
+                      <p>Sell</p>
+                      <p>{result.sellTime}</p>
+                    </div>
+                    <div className="flex">
+                      <p className="pr-2">Price: </p>
+                      <p className="font-medium">{result.got} ETH</p>
+                    </div>
+                    <div className="flex">
+                      <p className="pr-2">Token ID</p>
+                      <a
+                        href={result.sellTxHashUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        <p className="font-medium">{result.tokenId}</p>
+                      </a>
+                    </div>
                   </>
                 )}
               </div>

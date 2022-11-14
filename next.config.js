@@ -11,6 +11,7 @@ const nextConfig = {
       'img.seadn.io',
       'storage.opensea.io',
       'i.seadn.io',
+      'storage.googleapis.com'
     ],
   },
   env: {
