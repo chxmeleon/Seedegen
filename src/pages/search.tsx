@@ -1,26 +1,36 @@
 import React from 'react'
 import Layout from '../components/layouts/Layout'
 import axios from 'axios'
-import { useRouter } from "next/router";
+import { useRouter } from 'next/router'
 import { GetServerSideProps } from 'next'
-import Head from 'next/head';
-import SearchResult from '../components/elements/SearchResult';
-import SearchBar from '../components/elements/SearchBar';
+import Head from 'next/head'
+import SearchResult from '../components/elements/SearchResult'
+import SearchBar from '../components/elements/SearchBar'
 import useSWR from 'swr'
+import { orderBy } from 'lodash'
 
 const fetcher = (url: RequestInfo | URL) => fetch(url).then((r) => r.json())
 
 const Search = () => {
   const router = useRouter()
-
-  const apiUrl = 'api/data/buy-and-sell'
+  const apiUrl = `api/data/search-data?q=${router.query.q}`
 
   const { data: buyAndSellData } = useSWR(apiUrl, fetcher)
-  
   const buyData = buyAndSellData?.buyTransaction
   const sellData = buyAndSellData?.sellTransaction
-  const buyAndSellArray = buyData?.concat(sellData).sort(() => Math.random() - 0.5)
-  
+
+  const newBuyData = buyData?.map((obj: any) => {
+    obj.blockTime = obj.buyTime
+    return obj
+  })
+
+  const newSellData = sellData?.map((obj: any) => {
+    obj.blockTime = obj.sellTime
+    return obj
+  })
+
+  const buyAndSellArray = newBuyData?.concat(newSellData)
+  const finalData = orderBy(buyAndSellArray, ['blockTime'], ['desc'])
 
   return (
     <>
@@ -29,16 +39,14 @@ const Search = () => {
       </Head>
       <Layout>
         <section className="w-full">
-          <div className="flex items-center w-full pt-20">
-            <div className="m-auto w-full pb-10">
-              <SearchResult results={buyAndSellArray} />
+          <div className="flex items-center pt-20 w-full">
+            <div className="pb-10 m-auto w-full">
+              <SearchResult results={finalData} />
             </div>
           </div>
         </section>
       </Layout>
     </>
-
-
   )
 }
 

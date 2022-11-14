@@ -43,11 +43,13 @@ const SearchResult = ({ results }: any) => {
                 {Object.keys(result).find((keys) => keys === 'cost') ===
                 'cost' ? (
                   <>
+                    <p>{result.buyTime}</p>
                     <p>Buy</p>
                     <p>{result.cost}</p>
                   </>
                 ) : (
                   <>
+                    <p>{result.sellTime}</p>
                     <p>Sell</p>
                     <p>{result.got}</p>
                   </>

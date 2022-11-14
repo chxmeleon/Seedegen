@@ -251,6 +251,7 @@ const Trader = (props: any) => {
   )
 }
 
+
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const address = context.query.id?.toString() || ''
 
