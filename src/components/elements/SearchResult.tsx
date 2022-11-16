@@ -1,7 +1,4 @@
-import React, { useState } from 'react'
-import Pagination from '@mui/material/Pagination'
-import Stack from '@mui/material/Stack'
-import { number } from 'yup'
+import React, { useState, useRef, useCallback, useEffect } from 'react'
 import {
   HeartIcon,
   ChatBubbleLeftIcon,
@@ -9,51 +6,80 @@ import {
   BookmarkIcon,
   EllipsisHorizontalCircleIcon,
 } from '@heroicons/react/24/outline'
+const collections = require('../../config/project')
+import { Skeleton } from '@mui/material'
 
-const SearchResult = ({ results }: any) => {
+type SearchProps = {
+  results: any
+  isLoading: Boolean
+}
+
+const SearchResult = (props: SearchProps) => {
+  const { results, isLoading } = props
+
   return (
-    <section className="flex items-center w-full">
-      <div className="m-auto w-full max-w-[1300px]">
-        <div className="w-[45%] ml-[20%]">
-          {results?.map((result: any, idx: number) => (
-            <li
-              className="p-6 py-8 my-4 list-none dark:bg-slate-800/50"
-              key={idx}
-            >
-              <div className="flex justify-between items-start">
-                <div className="inline-flex items-center">
-                  <div className="flex overflow-hidden w-16 h-16 bg-amber-50 rounded-full">
-                    <span className="m-auto text-5xl font-bold text-zinc-600"></span>
-                  </div>
+    <>
+      {results?.map((result: any, idx: number) => {
+        const project = result?.projectAddress
+        const defaultProjectName = `${project?.slice(0, 4)}...${project?.slice(
+          -4
+        )}`
+        const projectName =
+          collections.find((item: any) => item.address === project)?.project ??
+          defaultProjectName
+
+        return (
+          <li
+            className="p-6 py-8 my-4 list-none dark:bg-slate-800/50"
+            key={idx}
+          >
+            <div className="flex justify-between items-start">
+              <div className="w-full inline-flex items-center">
+                <div className="flex overflow-hidden w-16 h-16 bg-amber-50 rounded-full">
+                  <span className="m-auto text-5xl font-bold text-zinc-600"></span>
+                </div>
+                {isLoading ?
+                  <Skeleton
+                    animation="wave"
+                    className="w-1/2 h-12 ml-8 dark:bg-gray-700 bg-stone-300"
+                  />
+                  : (
                   <a
-                    href={result.walletEtherscanUrl}
+                    href={result?.walletEtherscanUrl}
                     target="_blank"
                     rel="noopener noreferrer"
                   >
                     <h1 className="pl-8 text-2xl font-semibold">
-                      {result.walletAddress.slice(0, 4) +
+                      {result?.walletAddress?.slice(0, 4) +
                         '...' +
-                        result.walletAddress.slice(-4)}
+                        result?.walletAddress?.slice(-4)}
                     </h1>
                   </a>
-                </div>
-                <EllipsisHorizontalCircleIcon className="w-7" />
+                )}
               </div>
-              <div className="px-1 pt-10 pb-5">
-                {Object.keys(result).find((keys) => keys === 'cost') ===
-                'cost' ? (
-                  <>
-                    <div className="pb-6">
-                      <img
-                        src={`https://storage.googleapis.com/nftimagebucket/tokens/${result.projectAddress}/preview/${result.tokenId}.png`}
-                        alt="nft image"
-                      />
-                    </div>
-                    <div className="flex justify-between pb-4 w-full font-semibold">
-                      <p>Buy</p>
-                      <p>{result.buyTime}</p>
-                    </div>
+              <EllipsisHorizontalCircleIcon className="w-7" />
+            </div>
+            <div className="px-1 pt-10 pb-5">
+              {Object.keys(result).find((keys) => keys === 'cost') ===
+              'cost' ? (
+                <>
+                  <p className="pb-6">{projectName}</p>
+                  <div className="pb-6">
+                    <img
+                      src={`https://storage.googleapis.com/nftimagebucket/tokens/${result.projectAddress}/preview/${result.tokenId}.png`}
+                      alt="nft image"
+                    />
+                  </div>
+                  <div className="flex justify-between pb-4 w-full font-semibold">
+                    <p>Buy</p>
+                    <p>{result.buyTime}</p>
+                  </div>
+                  <div className="flex pb-2">
+                    <p className="pr-2">Price: </p>
                     <p className="font-medium">{result.cost} ETH</p>
+                  </div>
+                  <div className="flex">
+                    <p className="pr-2">Token ID:</p>
                     <a
                       href={result.buyTxHashUrl}
                       target="_blank"
@@ -61,51 +87,50 @@ const SearchResult = ({ results }: any) => {
                     >
                       <p className="font-medium">{result.tokenId}</p>
                     </a>
-                    <p>{result.projectAddress}</p>
-                  </>
-                ) : (
-                  <>
-                    <p className="pb-6">{result.projectAddress}</p>
-                    <div className="pb-6">
-                      <img
-                        src={`https://storage.googleapis.com/nftimagebucket/tokens/${result.projectAddress}/preview/${result.tokenId}.png`}
-                        alt="nft image"
-                      />
-                    </div>
-                    <div className="flex justify-between pb-4 w-full font-semibold">
-                      <p>Sell</p>
-                      <p>{result.sellTime}</p>
-                    </div>
-                    <div className="flex">
-                      <p className="pr-2">Price: </p>
-                      <p className="font-medium">{result.got} ETH</p>
-                    </div>
-                    <div className="flex">
-                      <p className="pr-2">Token ID</p>
-                      <a
-                        href={result.sellTxHashUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                      >
-                        <p className="font-medium">{result.tokenId}</p>
-                      </a>
-                    </div>
-                  </>
-                )}
+                  </div>
+                </>
+              ) : (
+                <>
+                  <p className="pb-6">{projectName}</p>
+                  <div className="pb-6">
+                    <img
+                      src={`https://storage.googleapis.com/nftimagebucket/tokens/${result.projectAddress}/preview/${result.tokenId}.png`}
+                      alt="nft image"
+                    />
+                  </div>
+                  <div className="flex justify-between pb-4 w-full font-semibold">
+                    <p>Sell</p>
+                    <p>{result.sellTime}</p>
+                  </div>
+                  <div className="flex pb-2">
+                    <p className="pr-2">Price: </p>
+                    <p className="font-medium">{result.got} ETH</p>
+                  </div>
+                  <div className="flex">
+                    <p className="pr-2">Token ID:</p>
+                    <a
+                      href={result.sellTxHashUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      <p className="font-medium">{result.tokenId}</p>
+                    </a>
+                  </div>
+                </>
+              )}
+            </div>
+            <div className="inline-flex justify-between items-center pt-9 w-full">
+              <div className="inline-flex justify-between items-center w-1/3">
+                <ChatBubbleLeftIcon className="w-7" />
+                <HeartIcon className="w-7" />
+                <ArrowUpOnSquareIcon className="w-7" />
               </div>
-              <div className="inline-flex justify-between items-center pt-9 w-full">
-                <div className="inline-flex justify-between items-center w-1/3">
-                  <ChatBubbleLeftIcon className="w-7" />
-                  <HeartIcon className="w-7" />
-                  <ArrowUpOnSquareIcon className="w-7" />
-                </div>
-                <BookmarkIcon className="w-7" />
-              </div>
-            </li>
-          ))}
-        </div>
-      </div>
-    </section>
+              <BookmarkIcon className="w-7" />
+            </div>
+          </li>
+        )
+      })}
+    </>
   )
 }
 

@@ -1,13 +1,15 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 import createMongoClient from '../../../lib/mongodbclint'
+import { orderBy, mapKeys } from 'lodash'
 
 export default async function handle(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
-  // const offset = Number(req.query.offset) || 0
-  // const limit = Number(req.query.limit) || 1000
+  const page = Number(req.query.page) || 1
+  const limit = Number(req.query.limit) || 10
   const query = req.query.q?.toString() || ''
+  const offset = (page - 1) * limit
 
   const db = await createMongoClient()
   const buyTransaction = await db
@@ -46,5 +48,25 @@ export default async function handle(
     .sort({sellTime: -1})
     .toArray()
 
-  res.status(200).json({ buyTransaction, sellTransaction })
+  const newBuyData = buyTransaction?.map((obj: any) => {
+    const newKey = mapKeys(obj, (value, key) => {
+      if (key === 'buyTime') return 'blockTime'
+      return key
+    })
+    return newKey
+  })
+
+
+  const newSellData = sellTransaction?.map((obj: any) => {
+    const newKey = mapKeys(obj, (value, key) => {
+      if (key === 'buyTime') return 'blockTime'
+      return key
+    })
+    return newKey
+  })
+
+  const buyAndSellArray = Array.from(new Set(newBuyData?.concat(newSellData)))
+  const searchData = orderBy(buyAndSellArray, ['blockTime'], ['desc']).slice(offset, offset + limit)
+
+  res.status(200).json(searchData)
 }
