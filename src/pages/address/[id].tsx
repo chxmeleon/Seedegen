@@ -11,6 +11,7 @@ import WinAndLoseForm from '../../components/elements/WinAndLoseForm'
 import Pagination from '@mui/material/Pagination'
 import Stack from '@mui/material/Stack'
 import { useRouter } from 'next/router'
+import { CheckIcon, ClipboardDocumentIcon } from '@heroicons/react/24/outline'
 const collections = require('../../config/project')
 
 const fetcher = (url: any) => axios.get(url).then((res: any) => res.data)
@@ -19,8 +20,7 @@ const Trader = (props: any) => {
   const { winLoseData, rankMergeData } = props
   const rankData = rankMergeData?.[0]
   const router = useRouter()
-  const queryOffset = router.query.offset 
-
+  const queryOffset = router.query.offset
 
   const etherscanUrl = winLoseData?.[0]?.walletEtherscanUrl
   const openseaUrl = winLoseData?.[0]?.walletOpenseaUrl
@@ -45,6 +45,21 @@ const Trader = (props: any) => {
   const handleChange = (e: React.ChangeEvent<unknown>, n: number) => {
     setPage(n)
   }
+
+  const [isCopy, setIsCopy] = useState(false)
+  const copyToClipboard = (text: string) => {
+    navigator.clipboard.writeText(text)
+  }
+
+  const handleAddressCopy = () => {
+    copyToClipboard(address)
+    setIsCopy(true)
+    setTimeout(() => {
+      setIsCopy(false)
+    }, 450)
+  }
+
+
 
   const currentPage = winLoseData?.slice(offset, 10 + offset)
 
@@ -153,10 +168,24 @@ const Trader = (props: any) => {
                   </div>
                 </div>
                 <div className="w-96">
-                  <h1 className="pt-5 pb-1 w-1/2 text-3xl font-medium truncate">
-                    {shortAddress}
-                  </h1>
-                  <div className="">{ens}</div>
+                  <div className="flex justify-start items-center pt-5 pb-1 w-full">
+                    <h1 className="w-[45%] text-3xl font-medium truncate">
+                      {shortAddress}
+                    </h1>
+                    <div className="">
+                      <button
+                        className="flex w-8 h-8 bg-gray-600 rounded-full active:bg-cyan-600 hover:bg-zinc-500"
+                        onClick={handleAddressCopy}
+                      >
+                        {isCopy ? (
+                          <CheckIcon className="m-auto w-5" />
+                        ) : (
+                          <ClipboardDocumentIcon className="m-auto w-5" />
+                        )}
+                      </button>
+                    </div>
+                  </div>
+                  <div>{ens}</div>
                 </div>
               </div>
             </div>
@@ -250,7 +279,6 @@ const Trader = (props: any) => {
     </Layout>
   )
 }
-
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const address = context.query.id?.toString() || ''

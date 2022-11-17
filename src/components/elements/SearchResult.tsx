@@ -38,14 +38,8 @@ const SearchResult = (props: SearchProps) => {
                 <div className="flex overflow-hidden w-16 h-16 bg-amber-50 rounded-full">
                   <span className="m-auto text-5xl font-bold text-zinc-600"></span>
                 </div>
-                {isLoading ?
-                  <Skeleton
-                    animation="wave"
-                    className="w-1/2 h-12 ml-8 dark:bg-gray-700 bg-stone-300"
-                  />
-                  : (
                   <a
-                    href={result?.walletEtherscanUrl}
+                    href={`/address/${result?.walletAddress}`}
                     target="_blank"
                     rel="noopener noreferrer"
                   >
@@ -55,7 +49,6 @@ const SearchResult = (props: SearchProps) => {
                         result?.walletAddress?.slice(-4)}
                     </h1>
                   </a>
-                )}
               </div>
               <EllipsisHorizontalCircleIcon className="w-7" />
             </div>

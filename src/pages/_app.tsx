@@ -3,12 +3,24 @@ import type { AppProps } from 'next/app'
 import { ThemeProvider } from 'next-themes'
 import Head from 'next/head'
 import { useEffect } from 'react'
-import 'chart.js/auto';
+import 'chart.js/auto'
+import { useRouter } from 'next/router'
 
 function MyApp({ Component, pageProps }: AppProps) {
   useEffect(() => {
     window.scrollTo(0, 0)
   })
+
+  const router = useRouter()
+  useEffect(() => {
+    router.beforePopState(({ url, as, options }) => {
+      if (as !== '/' && as !== '/search') {
+        window.location.href = as
+        return false
+      }
+      return true
+    })
+  }, [router])
 
   return (
     <>
@@ -23,7 +35,7 @@ function MyApp({ Component, pageProps }: AppProps) {
         <Component {...pageProps} />
       </ThemeProvider>
     </>
-  ) 
+  )
 }
 
 export default MyApp

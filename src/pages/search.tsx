@@ -2,28 +2,35 @@ import React, { useMemo, useState } from 'react'
 import Layout from '../components/layouts/Layout'
 import { useRouter } from 'next/router'
 import Head from 'next/head'
-import SearchResult from '../components/elements/SearchResult'
+// import SearchResult from '../components/elements/SearchResult'
 import useInfiniteScroll from 'react-infinite-scroll-hook'
 import useSWR from 'swr'
 import CircularProgress from '@mui/material/CircularProgress'
-import Box from '@mui/material/Box'
+import dynamic from 'next/dynamic'
+
+const SearchResult = dynamic(
+  () => import('../components/elements/SearchResult'),
+  { ssr: false }
+)
 
 const fetcher = (url: RequestInfo | URL) => fetch(url).then((r) => r.json())
 
 const Search = () => {
   const router = useRouter()
+  const query = router.query.q
   const [pageIndex, setPageIndex] = useState(1)
   const [result, setResult] = useState<Array<null>>([])
-  const apiPath = `api/data/search-data?q=${router.query.q}&page=${pageIndex}`
+  const apiPath = `api/data/search-data?q=${query}&page=${pageIndex}`
   const { data: searchData, error } = useSWR(apiPath, fetcher)
   const isLoading = !searchData && !error
+  
 
-  const hasNextPage = useMemo(() => pageIndex !== 10, [pageIndex])
+  const hasNextPage = useMemo(() => pageIndex !== 10 && !!query, [pageIndex, query])
   const loadMore = () => {
     setPageIndex(() => pageIndex + 1)
     setTimeout(() => {
       setResult((result) => [...result, ...searchData])
-    }, 1200);
+    }, 1370)
   }
 
   const [searchRef] = useInfiniteScroll({
@@ -50,9 +57,9 @@ const Search = () => {
                     {(isLoading || hasNextPage) && (
                       <div
                         ref={searchRef}
-                        className="flex justify-center py-20"
+                        className="flex justify-center py-32"
                       >
-                        <CircularProgress size={50} />
+                        <CircularProgress size={80} />
                       </div>
                     )}
                   </div>

@@ -10,7 +10,7 @@ const SearchBar = () => {
     e.preventDefault()
     const query = searchInputRef.current?.value
     if (!query) return
-    router.push(`/search?q=${query}`, undefined, { shallow: true })
+    router.push(`/search?q=${query}`).then(() => router.reload())
   }
 
   return (
