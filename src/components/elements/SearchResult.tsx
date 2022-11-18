@@ -7,10 +7,7 @@ import {
   EllipsisHorizontalCircleIcon,
 } from '@heroicons/react/24/outline'
 const collections = require('../../config/project')
-import dynamic from 'next/dynamic'
-const OptimizeImage = dynamic(() => import('../elements/OptimizeImage'), {
-  ssr: false,
-})
+import OptimizeImage from '../elements/OptimizeImage'
 
 type SearchProps = {
   results: any

@@ -1,5 +1,6 @@
 import Image from 'next/image'
 import React, { useState } from 'react'
+import nftPlaceholder from '../../../public/nft-placeholder.svg'
 
 type ImageProps = {
   src: string
@@ -13,7 +14,16 @@ const OptimizeImage = (props: ImageProps) => {
 
   return (
     <div className="w-full h-full">
-      {isImageError ? null : (
+      {isImageError ? (
+        <div className="bg-slate-900 p-10 flex justify-center rounded-xl">
+          <Image
+            {...nftPlaceholder}
+            alt="nft placeholder"
+            width={400}
+            height={400}
+          />
+        </div>
+      ) : (
         <Image
           src={src}
           alt={alt}
