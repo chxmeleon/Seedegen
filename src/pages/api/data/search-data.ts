@@ -59,7 +59,7 @@ export default async function handle(
 
   const newSellData = sellTransaction?.map((obj: any) => {
     const newKey = mapKeys(obj, (value, key) => {
-      if (key === 'buyTime') return 'blockTime'
+      if (key === 'sellTime') return 'blockTime'
       return key
     })
     return newKey

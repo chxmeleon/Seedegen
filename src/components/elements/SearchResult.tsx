@@ -1,4 +1,4 @@
-import React, { useState, useRef, useCallback, useEffect } from 'react'
+import React from 'react'
 import {
   HeartIcon,
   ChatBubbleLeftIcon,
@@ -7,16 +7,14 @@ import {
   EllipsisHorizontalCircleIcon,
 } from '@heroicons/react/24/outline'
 const collections = require('../../config/project')
-import { Skeleton } from '@mui/material'
+import OptimizeImage from '../elements/OptimizeImage'
 
 type SearchProps = {
   results: any
-  isLoading: Boolean
 }
 
 const SearchResult = (props: SearchProps) => {
-  const { results, isLoading } = props
-
+  const { results } = props
   return (
     <>
       {results?.map((result: any, idx: number) => {
@@ -27,28 +25,28 @@ const SearchResult = (props: SearchProps) => {
         const projectName =
           collections.find((item: any) => item.address === project)?.project ??
           defaultProjectName
-
+        const imageSrc = `https://storage.googleapis.com/nftimagebucket/tokens/${result.projectAddress}/preview/${result.tokenId}.png`
         return (
           <li
             className="p-6 py-8 my-4 list-none dark:bg-slate-800/50"
             key={idx}
           >
             <div className="flex justify-between items-start">
-              <div className="w-full inline-flex items-center">
+              <div className="inline-flex items-center w-full">
                 <div className="flex overflow-hidden w-16 h-16 bg-amber-50 rounded-full">
                   <span className="m-auto text-5xl font-bold text-zinc-600"></span>
                 </div>
-                  <a
-                    href={`/address/${result?.walletAddress}`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    <h1 className="pl-8 text-2xl font-semibold">
-                      {result?.walletAddress?.slice(0, 4) +
-                        '...' +
-                        result?.walletAddress?.slice(-4)}
-                    </h1>
-                  </a>
+                <a
+                  href={`/address/${result?.walletAddress}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <h1 className="pl-8 text-2xl font-semibold">
+                    {result?.walletAddress?.slice(0, 4) +
+                      '...' +
+                      result?.walletAddress?.slice(-4)}
+                  </h1>
+                </a>
               </div>
               <EllipsisHorizontalCircleIcon className="w-7" />
             </div>
@@ -58,10 +56,7 @@ const SearchResult = (props: SearchProps) => {
                 <>
                   <p className="pb-6">{projectName}</p>
                   <div className="pb-6">
-                    <img
-                      src={`https://storage.googleapis.com/nftimagebucket/tokens/${result.projectAddress}/preview/${result.tokenId}.png`}
-                      alt="nft image"
-                    />
+                    <OptimizeImage src={imageSrc} alt="nft image" />
                   </div>
                   <div className="flex justify-between pb-4 w-full font-semibold">
                     <p>Buy</p>
@@ -86,10 +81,7 @@ const SearchResult = (props: SearchProps) => {
                 <>
                   <p className="pb-6">{projectName}</p>
                   <div className="pb-6">
-                    <img
-                      src={`https://storage.googleapis.com/nftimagebucket/tokens/${result.projectAddress}/preview/${result.tokenId}.png`}
-                      alt="nft image"
-                    />
+                    <OptimizeImage src={imageSrc} alt="nft image" />
                   </div>
                   <div className="flex justify-between pb-4 w-full font-semibold">
                     <p>Sell</p>
