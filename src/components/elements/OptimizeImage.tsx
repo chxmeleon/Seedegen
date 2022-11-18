@@ -12,17 +12,17 @@ const OptimizeImage = (props: ImageProps) => {
   const fallback = () => setIsImageError(true)
 
   return (
-    <>
+    <div className="w-full h-full">
       {isImageError ? null : (
         <Image
           src={src}
           alt={alt}
-          width={500}
-          height={500}
+          width={550}
+          height={550}
           onError={fallback}
         />
       )}
-    </>
+    </div>
   )
 }
 export default OptimizeImage

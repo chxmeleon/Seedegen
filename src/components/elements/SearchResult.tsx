@@ -7,7 +7,10 @@ import {
   EllipsisHorizontalCircleIcon,
 } from '@heroicons/react/24/outline'
 const collections = require('../../config/project')
-import OptimizeImage from '../elements/OptimizeImage'
+import dynamic from 'next/dynamic'
+const OptimizeImage = dynamic(() => import('../elements/OptimizeImage'), {
+  ssr: false,
+})
 
 type SearchProps = {
   results: any
@@ -60,7 +63,7 @@ const SearchResult = (props: SearchProps) => {
                   </div>
                   <div className="flex justify-between pb-4 w-full font-semibold">
                     <p>Buy</p>
-                    <p>{result.buyTime}</p>
+                    <p>{result.blockTime}</p>
                   </div>
                   <div className="flex pb-2">
                     <p className="pr-2">Price: </p>
@@ -85,7 +88,7 @@ const SearchResult = (props: SearchProps) => {
                   </div>
                   <div className="flex justify-between pb-4 w-full font-semibold">
                     <p>Sell</p>
-                    <p>{result.sellTime}</p>
+                    <p>{result.blockTime}</p>
                   </div>
                   <div className="flex pb-2">
                     <p className="pr-2">Price: </p>

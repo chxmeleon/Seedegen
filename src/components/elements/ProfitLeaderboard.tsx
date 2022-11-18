@@ -50,13 +50,14 @@ const ProfitLeaderboard: React.FC<ProfitLeaderboardProps<DataRow>> = ({
     const maxSpent = maxValueList[2]
     const maxRoi = maxValueList[3]
     const address = data?.address
+    
 
     return (
       <ProfitRank
         key={idx.toString()}
         id={(idx + 1).toString()}
         ens={data?.ens}
-        address={address}
+        address={address?.toString()}
         spent={spent}
         revernced={revernced}
         profit={profit}

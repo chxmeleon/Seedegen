@@ -19,9 +19,6 @@ const fetcher = (url: any) => axios.get(url).then((res: any) => res.data)
 const Trader = (props: any) => {
   const { winLoseData, rankMergeData } = props
   const rankData = rankMergeData?.[0]
-  const router = useRouter()
-  const queryOffset = router.query.offset
-
   const etherscanUrl = winLoseData?.[0]?.walletEtherscanUrl
   const openseaUrl = winLoseData?.[0]?.walletOpenseaUrl
   const ens = rankData?.ens
@@ -60,7 +57,6 @@ const Trader = (props: any) => {
   }
 
 
-
   const currentPage = winLoseData?.slice(offset, 10 + offset)
 
   const winLoseBoard = currentPage.map((data: any, idx: any) => {
@@ -69,8 +65,8 @@ const Trader = (props: any) => {
     const spent = data?.cost
     const revernced = data?.got
     const profit = data?.net
-    const buyTxHashUrl = data?.buyTxHashUrl
-    const sellTxHashUrl = data?.sellTxHashUrl
+    const buyTxHashUrl = data?.buyTxHashUrl?.toString()
+    const sellTxHashUrl = data?.sellTxHashUrl?.toString()
     const tokenId = data?.tokenId
     const project = data?.projectAddress
     const defaultProjectName = `${project.slice(0, 4)}...${project.slice(-4)}`
@@ -172,7 +168,7 @@ const Trader = (props: any) => {
                     <h1 className="w-[45%] text-3xl font-medium truncate">
                       {shortAddress}
                     </h1>
-                    <div className="">
+                    <div>
                       <button
                         className="flex w-8 h-8 bg-gray-600 rounded-full active:bg-cyan-600 hover:bg-zinc-500"
                         onClick={handleAddressCopy}
