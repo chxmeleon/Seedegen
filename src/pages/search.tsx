@@ -46,7 +46,7 @@ const Search = () => {
   return (
     <>
       <Head>
-        <title>{router.query?.q}- ICU Search</title>
+        <title>{router.query?.q?.slice(0,9)} - ICU Search</title>
       </Head>
       <Layout>
         <section className="w-full">

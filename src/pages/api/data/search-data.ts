@@ -13,7 +13,7 @@ export default async function handle(
 
   const db = await createMongoClient()
   const buyTransaction = await db
-    .collection('winAndLose')
+    .collection('search-data')
     .find({ $text: { $search: query } })
     .project({
       _id: false,
@@ -26,12 +26,13 @@ export default async function handle(
       buyTxHash: true,
       buyTxHashUrl: true,
       cost: true,
+      category: true
     })
-    .sort({buyTime: -1})
+    .sort({ buyTime: -1 })
     .toArray()
 
   const sellTransaction = await db
-    .collection('winAndLose')
+    .collection('search-data')
     .find({ $text: { $search: query } })
     .project({
       _id: false,
@@ -44,8 +45,9 @@ export default async function handle(
       sellTxHash: true,
       sellTxHashUrl: true,
       got: true,
+      category: true
     })
-    .sort({sellTime: -1})
+    .sort({ sellTime: -1 })
     .toArray()
 
   const newBuyData = buyTransaction?.map((obj: any) => {
@@ -56,7 +58,6 @@ export default async function handle(
     return newKey
   })
 
-
   const newSellData = sellTransaction?.map((obj: any) => {
     const newKey = mapKeys(obj, (value, key) => {
       if (key === 'sellTime') return 'blockTime'
@@ -66,7 +67,10 @@ export default async function handle(
   })
 
   const buyAndSellArray = Array.from(new Set(newBuyData?.concat(newSellData)))
-  const searchData = orderBy(buyAndSellArray, ['blockTime'], ['desc']).slice(offset, offset + limit)
+  const searchData = orderBy(buyAndSellArray, ['blockTime'], ['desc']).slice(
+    offset,
+    offset + limit
+  )
 
   res.status(200).json(searchData)
 }

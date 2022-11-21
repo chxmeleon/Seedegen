@@ -10,16 +10,17 @@ type Props = {
 }
 
 const Layout = ({ children }: Props) => {
+  const router = useRouter()
   return (
     <>
       <section>
-        {useRouter().route === '/search' ? 
+        {router.route === '/search' ? 
           <SearchHeader />
         : 
           <Header />
       }
         {children}
-        {useRouter().route === '/search' ? 
+        {router.route === '/search'  ? 
           null
         : 
           <Footer />
