@@ -56,22 +56,21 @@ const Search = () => {
             <div className="pb-10 m-auto w-full">
               <section className="flex items-center w-full">
                 <div className="m-auto w-full max-w-[1300px]">
-                  {isNotFound ? (
-                    <div className="mt-[28%]  flex justify-center items-center text-5xl font-medium">
-                      <h1>Search is Not Found</h1>
-                    </div>
-                  ) : (
-                    <div className="w-[45%] ml-[20%]">
-                      <SearchResult results={result} />
-                      {(isLoading || hasNextPage) && (
-                        <div ref={searchRef}>
-                          {[...new Array(3)].map((_val, idx: number) => (
-                            <SearchResultSkeleton key={idx} />
-                          ))}
-                        </div>
-                      )}
-                    </div>
-                  )}
+                  <div className="w-[45%] ml-[20%]">
+                    <SearchResult results={result} />
+                    {(isLoading || hasNextPage) && (
+                      <div ref={searchRef}>
+                        {[...new Array(3)].map((_val, idx: number) => (
+                          <SearchResultSkeleton key={idx} />
+                        ))}
+                      </div>
+                    )}
+                    {isNotFound && (
+                      <div className="mt-[28%] flex justify-center items-center text-5xl font-medium">
+                        <h1>Search is Not Found</h1>
+                      </div>
+                    )}
+                  </div>
                 </div>
               </section>
             </div>
