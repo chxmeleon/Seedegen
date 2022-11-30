@@ -23,7 +23,7 @@ const Search = () => {
   const apiPath = `api/data/search-data?q=${query}&page=${pageIndex}`
   const { data: searchData, error } = useSWR(apiPath, fetcher)
   const isLoading = !searchData && !error
-  const isNotFound = !searchData?.length 
+  const isNotFound = !result?.length 
 
   const hasNextPage = useMemo(
     () => pageIndex !== 10 && !!query,
