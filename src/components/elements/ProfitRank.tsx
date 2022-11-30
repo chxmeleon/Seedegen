@@ -18,7 +18,7 @@ type RankProps = {
   data: any
 }
 
-const ProfitRank = (props: RankProps) => {
+const ProfitRank: React.FC<RankProps> = (props) => {
   const {
     id,
     ens,
