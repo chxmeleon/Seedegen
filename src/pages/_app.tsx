@@ -5,6 +5,19 @@ import Head from 'next/head'
 import { useEffect } from 'react'
 import 'chart.js/auto'
 import { useRouter } from 'next/router'
+import { WagmiConfig, createClient, configureChains, chain } from 'wagmi'
+import { publicProvider } from 'wagmi/providers/public'
+
+const { chains, provider, webSocketProvider } = configureChains(
+  [chain.mainnet, chain.optimism],
+  [publicProvider()]
+)
+
+const client = createClient({
+  autoConnect: true,
+  provider,
+  webSocketProvider,
+})
 
 function MyApp({ Component, pageProps }: AppProps) {
   useEffect(() => {
@@ -30,10 +43,11 @@ function MyApp({ Component, pageProps }: AppProps) {
         <meta property="og:image" content="../public/favicon.ico" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-
-      <ThemeProvider attribute="class" defaultTheme="system">
-        <Component {...pageProps} />
-      </ThemeProvider>
+      <WagmiConfig client={client}>
+        <ThemeProvider attribute="class" defaultTheme="system">
+          <Component {...pageProps} />
+        </ThemeProvider>
+      </WagmiConfig>
     </>
   )
 }

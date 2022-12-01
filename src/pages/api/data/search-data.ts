@@ -12,65 +12,14 @@ export default async function handle(
   const offset = (page - 1) * limit
 
   const db = await createMongoClient()
-  const buyTransaction = await db
-    .collection('search-data')
+  const queryData = await db
+    .collection('nftTrade')
     .find({ $text: { $search: query } })
-    .project({
-      _id: false,
-      walletAddress: true,
-      walletEtherscanUrl: true,
-      projectEtherscanUrl: true,
-      projectAddress: true,
-      tokenId: true,
-      buyTime: true,
-      buyTxHash: true,
-      buyTxHashUrl: true,
-      cost: true,
-      category: true
-    })
-    .sort({ buyTime: -1 })
+    .project({ _id: false })
+    .sort({blockTime: -1})
     .toArray()
 
-  const sellTransaction = await db
-    .collection('search-data')
-    .find({ $text: { $search: query } })
-    .project({
-      _id: false,
-      walletAddress: true,
-      walletEtherscanUrl: true,
-      projectEtherscanUrl: true,
-      projectAddress: true,
-      tokenId: true,
-      sellTime: true,
-      sellTxHash: true,
-      sellTxHashUrl: true,
-      got: true,
-      category: true
-    })
-    .sort({ sellTime: -1 })
-    .toArray()
+  const nftTrade = queryData.slice(offset, offset + limit)
 
-  const newBuyData = buyTransaction?.map((obj: any) => {
-    const newKey = mapKeys(obj, (value, key) => {
-      if (key === 'buyTime') return 'blockTime'
-      return key
-    })
-    return newKey
-  })
-
-  const newSellData = sellTransaction?.map((obj: any) => {
-    const newKey = mapKeys(obj, (value, key) => {
-      if (key === 'sellTime') return 'blockTime'
-      return key
-    })
-    return newKey
-  })
-
-  const buyAndSellArray = Array.from(new Set(newBuyData?.concat(newSellData)))
-  const searchData = orderBy(buyAndSellArray, ['blockTime'], ['desc']).slice(
-    offset,
-    offset + limit
-  )
-
-  res.status(200).json(searchData)
+  res.status(200).json(nftTrade)
 }
