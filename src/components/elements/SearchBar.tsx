@@ -15,14 +15,14 @@ const SearchBar = () => {
 
   return (
     <form
-      className="flex relative items-center w-[500px]"
+      className="flex relative items-center w-full"
       onSubmit={search}
       ref={searchBoxRef}
     >
       <input
         ref={searchInputRef}
         type="text"
-        className="py-2.5 px-8 font-medium rounded-full transition-all duration-200 ease-in-out dark:bg-gray-800 outline-0 w-[500px] bg-zinc-200 dark:text-slate-200"
+        className="flex-shrink py-2.5 px-8 w-full font-medium rounded-full transition-all duration-200 ease-in-out dark:bg-gray-800 outline-0 bg-zinc-200 dark:text-slate-200 h-11"
         id="input"
         placeholder="Search..."
         autoComplete="off"
