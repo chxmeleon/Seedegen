@@ -1,6 +1,5 @@
 import React from 'react'
 import Header from './Header'
-import SearchHeader from './SearchHeader'
 import Footer from './Footer'
 import { useRouter } from 'next/router'
 
@@ -14,11 +13,7 @@ const Layout = ({ children }: Props) => {
   return (
     <>
       <section>
-        {router.route === '/search' ? 
-          <SearchHeader />
-        : 
-          <Header />
-      }
+        <Header />
         {children}
         {router.route === '/search'  ? 
           null

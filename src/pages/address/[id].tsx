@@ -132,7 +132,7 @@ const Trader = (props: any) => {
   return (
     <Layout>
       <div className="flex w-full">
-        <div className="py-24 px-16 mx-auto w-full max-w-[1300px]">
+        <div className="py-24 px-16 mx-auto w-full max-w-[1440px]">
           <div className="flex justify-between items-center py-5">
             <div className="flex justify-between items-center mr-4 rounded-lg h-[250px] dark:bg-slate-800">
               <div className="px-12">
@@ -227,15 +227,15 @@ const Trader = (props: any) => {
             </div>
           </div>
           <div className="flex justify-between items-center pb-6 w-full">
-            <div className="flex flex-col items-center p-2 py-2.5 mr-2 w-2/3 rounded-md h-[425px] dark:bg-slate-800">
-              <div className="py-4 text-3xl font-semibold dark:text-slate-100">
+            <div className="flex flex-col items-center p-2 py-3.5 mr-2 w-2/3 rounded-md h-[450px] dark:bg-slate-800">
+              <div className="pt-3 text-3xl font-semibold dark:text-slate-100">
                 Data Bar Chart
               </div>
               <div className="p-4 w-full">
                 <Bar data={barData} options={barOpt} />
               </div>
             </div>
-            <div className="flex flex-col justify-evenly items-center p-5 ml-2 w-1/2 rounded-md h-[425px] dark:bg-slate-800">
+            <div className="flex flex-col justify-evenly items-center p-5 ml-2 w-1/2 rounded-md h-[450px] dark:bg-slate-800">
               <div className="pb-8 text-3xl font-semibold dark:text-slate-100">
                 Win & Lose
               </div>
