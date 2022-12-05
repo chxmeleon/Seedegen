@@ -7,8 +7,8 @@ import { useRouter } from 'next/router'
 import SearchBar from '../elements/SearchBar'
 
 type HeaderProps = {
-  disConnect: any
-  onClick: any
+  disConnect: React.MouseEventHandler<HTMLButtonElement>
+  onClick: React.MouseEventHandler<HTMLButtonElement>
   isConnected: boolean
 }
 
