@@ -7,28 +7,25 @@ import { useRouter } from 'next/router'
 import SearchBar from '../elements/SearchBar'
 
 type HeaderProps = {
+  openModal: React.MouseEventHandler<HTMLButtonElement>
+  openSidebar: React.MouseEventHandler<HTMLButtonElement>
   disConnect: React.MouseEventHandler<HTMLButtonElement>
-  onClick: React.MouseEventHandler<HTMLButtonElement>
   isConnected: boolean
 }
 
 const Header: React.FC<HeaderProps> = (props) => {
-  const { onClick, isConnected, disConnect } = props
+  const { openModal, openSidebar, isConnected, disConnect } = props
   const router = useRouter()
   return (
     <header className="relative">
       <div className="navbar-container">
         <Link href="/">
           <a aria-label="News page link">
-            <h1 className="text-2xl font-bold">ICU</h1>
+            <h1 className="text-2xl font-bold">Seedegen</h1>
           </a>
         </Link>
         <div className="ml-[178px] w-[580px]">
-          {router.route !== '/' ? (
-            <div>
-              <SearchBar />
-            </div>
-          ) : null}
+          <SearchBar />
         </div>
         <ul className="navbar-right">
           <li>
@@ -57,9 +54,9 @@ const Header: React.FC<HeaderProps> = (props) => {
           </li>
           <li>
             <div className="user-dropdown">
-              <button className="user-dropdown-btn">
+              <button className="user-dropdown-btn" onClick={openSidebar}>
                 {isConnected ? (
-                  <div className="w-8 h-8 rounded-full bg-amber-400"></div>
+                  <div className="w-8 h-8 bg-amber-400 rounded-full"></div>
                 ) : (
                   <UserCircleIcon className="w-8" />
                 )}
@@ -67,7 +64,7 @@ const Header: React.FC<HeaderProps> = (props) => {
               <div className="user-dropdown-content">
                 <Link href="/">
                   <a aria-label="user link">
-                    <p className="pr-6 pt-6">Profile</p>
+                    <p className="pt-6 pr-6">Profile</p>
                   </a>
                 </Link>
                 <div className="flex justify-start items-center pt-2">
@@ -81,7 +78,7 @@ const Header: React.FC<HeaderProps> = (props) => {
             </div>
           </li>
           <li className="pt-1.5">
-            <button onClick={onClick}>
+            <button onClick={openModal}>
               <WalletIcon className="w-8 dark:text-gray-50" />
             </button>
           </li>
