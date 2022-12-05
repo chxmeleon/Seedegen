@@ -6,7 +6,14 @@ import { UserCircleIcon } from '@heroicons/react/24/solid'
 import { useRouter } from 'next/router'
 import SearchBar from '../elements/SearchBar'
 
-export default function Header() {
+type HeaderProps = {
+  disConnect: any
+  onClick: any
+  isConnected: boolean
+}
+
+const Header: React.FC<HeaderProps> = (props) => {
+  const { onClick, isConnected, disConnect } = props
   const router = useRouter()
   return (
     <header className="relative">
@@ -51,23 +58,30 @@ export default function Header() {
           <li>
             <div className="user-dropdown">
               <button className="user-dropdown-btn">
-                <UserCircleIcon className="w-8" />
+                {isConnected ? (
+                  <div className="w-8 h-8 rounded-full bg-amber-400"></div>
+                ) : (
+                  <UserCircleIcon className="w-8" />
+                )}
               </button>
               <div className="user-dropdown-content">
                 <Link href="/">
                   <a aria-label="user link">
-                    <p>Sign Up</p>
+                    <p className="pr-6 pt-6">Profile</p>
                   </a>
                 </Link>
-                <div className="flex justify-center items-center pt-6">
+                <div className="flex justify-start items-center pt-2">
                   <div className="pr-6 pb-2">Darkmode</div>
                   <ThemeSwitcher />
+                </div>
+                <div className="pr-6 pb-2">
+                  <button onClick={disConnect}>Log Out</button>
                 </div>
               </div>
             </div>
           </li>
           <li className="pt-1.5">
-            <button>
+            <button onClick={onClick}>
               <WalletIcon className="w-8 dark:text-gray-50" />
             </button>
           </li>
@@ -76,3 +90,5 @@ export default function Header() {
     </header>
   )
 }
+
+export default Header

@@ -45,7 +45,9 @@ function MyApp({ Component, pageProps }: AppProps) {
       </Head>
 
       <ThemeProvider attribute="class" defaultTheme="system">
-        <Component {...pageProps} />
+        <WagmiConfig client={client}>
+          <Component {...pageProps} />
+        </WagmiConfig>
       </ThemeProvider>
     </>
   )
