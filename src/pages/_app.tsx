@@ -5,8 +5,21 @@ import Head from 'next/head'
 import { useEffect } from 'react'
 import 'chart.js/auto'
 import { useRouter } from 'next/router'
+import { createClient, WagmiConfig } from 'wagmi'
+import { chain, configureChains } from 'wagmi'
+import { publicProvider } from 'wagmi/providers/public'
 
 function MyApp({ Component, pageProps }: AppProps) {
+  const { provider, webSocketProvider } = configureChains(
+    [chain.mainnet, chain.rinkeby],
+    [publicProvider()]
+  )
+
+  const client = createClient({
+    provider,
+    webSocketProvider,
+  })
+
   useEffect(() => {
     window.scrollTo(0, 0)
   })
