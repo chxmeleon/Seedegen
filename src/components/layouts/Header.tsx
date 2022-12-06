@@ -15,7 +15,6 @@ type HeaderProps = {
 
 const Header: React.FC<HeaderProps> = (props) => {
   const { openModal, openSidebar, isConnected, disConnect } = props
-  const router = useRouter()
   return (
     <header className="relative">
       <div className="navbar-container">
@@ -29,7 +28,7 @@ const Header: React.FC<HeaderProps> = (props) => {
         </div>
         <ul className="navbar-right">
           <li>
-            <Link href="/Analytics">
+            <Link href="/analytics">
               <a aria-label="News page link">
                 <p>Analytics</p>
               </a>
@@ -39,12 +38,12 @@ const Header: React.FC<HeaderProps> = (props) => {
             <div className="menu-dropdown">
               <button className="menu-dropdown-btn">Collections</button>
               <div className="menu-dropdown-content">
-                <Link href="/Trending">
+                <Link href="/trending">
                   <a aria-label="News page link">
                     <p>Trending</p>
                   </a>
                 </Link>
-                <Link href="/Discover">
+                <Link href="/discover">
                   <a aria-label="News page link">
                     <p>Discover</p>
                   </a>
