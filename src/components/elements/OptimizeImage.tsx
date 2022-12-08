@@ -15,22 +15,26 @@ const OptimizeImage = (props: ImageProps) => {
   return (
     <div className="w-full h-full">
       {isImageError ? (
-        <div className="bg-slate-900 p-10 flex justify-center rounded-xl">
-          <Image
-            {...nftPlaceholder}
-            alt="nft placeholder"
-            width={400}
-            height={400}
-          />
+        <div className="flex">
+          <div className="m-auto p-10 bg-slate-900 w-[550px] h-[550px] flex justify-center  rounded-xl">
+            <Image
+              {...nftPlaceholder}
+              alt="nft placeholder"
+              width={400}
+              height={400}
+            />
+          </div>
         </div>
       ) : (
-        <Image
-          src={src}
-          alt={alt}
-          width={550}
-          height={550}
-          onError={fallback}
-        />
+        <div className="flex justify-center">
+          <Image
+            src={src}
+            alt={alt}
+            width={550}
+            height={550}
+            onError={fallback}
+          />
+        </div>
       )}
     </div>
   )

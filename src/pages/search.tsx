@@ -5,7 +5,6 @@ import Head from 'next/head'
 import useInfiniteScroll from 'react-infinite-scroll-hook'
 import useSWR from 'swr'
 import dynamic from 'next/dynamic'
-// import SearchResult from '../components/elements/SearchResult'
 import SearchResultSkeleton from '../components/elements/SearchResultSkeleton'
 
 const SearchResult = dynamic(
@@ -23,7 +22,7 @@ const Search = () => {
   const apiPath = `api/data/search-data?q=${query}&page=${pageIndex}`
   const { data: searchData, error } = useSWR(apiPath, fetcher)
   const isLoading = !searchData && !error
-  const isNotFound = !result?.length 
+  const isNotFound = !result?.length
 
   const hasNextPage = useMemo(
     () => pageIndex !== 10 && !!query,
@@ -52,28 +51,20 @@ const Search = () => {
       </Head>
       <Layout>
         <section className="w-full">
-          <div className="flex items-center pt-20 w-full">
-            <div className="pb-10 m-auto w-full">
-              <section className="flex items-center w-full">
-                <div className="m-auto w-full max-w-[1300px]">
-                  <div className="w-[45%] ml-[20%]">
-                    <SearchResult results={result} />
-                    {(isLoading || hasNextPage) && (
-                      <div ref={searchRef}>
-                        {[...new Array(3)].map((_val, idx: number) => (
-                          <SearchResultSkeleton key={idx} />
-                        ))}
-                      </div>
-                    )}
-                    {isNotFound && (
-                      <div className="mt-[28%] flex justify-center items-center text-5xl font-medium">
-                        <h1>Search is Not Found</h1>
-                      </div>
-                    )}
-                  </div>
-                </div>
-              </section>
-            </div>
+          <div className="w-full md:min-w-[600px]">
+            <SearchResult results={result} />
+            {(isLoading || hasNextPage) && (
+              <div ref={searchRef}>
+                {[...new Array(3)].map((_val, idx: number) => (
+                  <SearchResultSkeleton key={idx} />
+                ))}
+              </div>
+            )}
+            {isNotFound && (
+              <div className="mt-[28%] flex justify-center items-center text-5xl font-medium">
+                <h1>Search is Not Found</h1>
+              </div>
+            )}
           </div>
         </section>
       </Layout>

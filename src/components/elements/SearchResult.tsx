@@ -28,7 +28,7 @@ const SearchResult = (props: SearchProps) => {
         const imageSrc = `https://storage.googleapis.com/nftimagebucket/tokens/${result.projectAddress}/preview/${result.tokenId}.png`
         return (
           <li
-            className="p-6 py-8 my-4 list-none dark:bg-slate-800/50"
+            className=" p-10 my-6 list-none dark:bg-slate-800/50"
             key={idx}
           >
             <div className="flex justify-between items-start">
