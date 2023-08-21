@@ -1,24 +1,29 @@
-# Seedegen dapp 
+# Seedegen dapp
 
-The decentralized application that feeds NFT trading data.
+The decentralized application that provides real-time data for NFT trading.
 
-## Package Manager 
-- yarn 
+## Package Manager
+
+- yarn
 
 ## Frontend
+
 - Next.js
 - Sass
 - TailwindCSS
-- mui
+- MUI
 
 ## Backend
-- prisma
-- mongodb
 
-## Crawler
-- puppeteer
-- dune
+- Prisma
+- MongoDB
+- Crawler
+  - Puppeteer
+  - Docker
+  - GCP
+  - Dune
 
-## Web3.0
+## Ethereum Wallet
+
 - wagmi
-- ethers.js 
+- ethers.js
