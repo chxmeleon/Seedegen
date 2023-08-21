@@ -18,7 +18,7 @@ const Header: React.FC<HeaderProps> = (props) => {
   return (
     <header className="relative dark:bg-red-400">
       <div className="flex justify-center w-full">
-        <div className="navbar-container ">
+        <div className="navbar-container">
           <Link href="/">
             <a aria-label="News page link">
               <h1 className="text-2xl font-bold">Seedegen</h1>

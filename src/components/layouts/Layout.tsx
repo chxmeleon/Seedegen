@@ -67,6 +67,7 @@ const Layout = ({ children }: Props) => {
       {isModalShow && (
         <WalletModal connectMetaMask={handleConnectWalletModal} />
       )}
+
       {isSidebarShow && (
         <div className="fixed right-0 top-20 h-screen bg-gray-800 w-[300px]">
           <button onClick={handleConnectWalletSidebar}>close</button>

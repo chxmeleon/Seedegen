@@ -15,7 +15,9 @@ const SearchResult = dynamic(
 const fetcher = (url: RequestInfo | URL) => fetch(url).then((r) => r.json())
 
 const Home: NextPage = () => {
+  
   const query = 'nft'
+  console.log(query)
   const [pageIndex, setPageIndex] = useState(1)
   const [result, setResult] = useState<Array<null>>([])
   const apiPath = `api/data/search-data?q=${query}&page=${pageIndex}`
